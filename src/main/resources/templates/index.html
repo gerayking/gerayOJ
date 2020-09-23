@@ -7,11 +7,19 @@
     <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap-theme.css}">
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"/>
     <script th:src="@{/bootstrap/js/bootstrap.js}"></script>
-    <link rel="stylesheet" type="text/css" th:href="@{/login.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">
 </head>
 <body>
+<script>
+    function LoginUp(){
+        document.getElementById("login").setAttribute("style","display:block")
+    }
+    function LoginDown(){
+        document.getElementById("login").setAttribute("style","display:none")
+    }
+</script>
 <div th:insert="login::navigation"></div>
-<div>
+<div id="login" style="display: none" class="modal fade in">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -34,7 +42,7 @@
                 <button type="button" class="btn btn-secondary float-xs-left" id="btn-forget-password">
                     Forget Password
                 </button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" onclick="LoginDown()" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 <button type="submit" class="btn btn-primary ">Sign in</button>
 
             </div>
