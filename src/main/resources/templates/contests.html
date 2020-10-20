@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GerayOJ</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap-theme.css}">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"/>
+    <script th:src="@{/bootstrap/js/bootstrap.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">
+
+</head>
+<body>
+<div th:insert="header::navigation"></div>
+<div class="col-md-2"></div>
+<div class="col-md-8">
+    <table class="table table-striped">
+        <thead>
+        <tr class="row">
+            <th>Cid</th>
+            <th>Title</th>
+            <th>description</th>
+            <th>StarTime</th>
+            <th>EndTime</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="row" th:each="contest,contestStat:${contests}">
+            <th th:text="${contest.getCID()}"></th>
+            <th>
+                <a th:href="'/contest/'+${contest.getCID()}" th:text="${contest.getTitle()}"></a>
+            </th>
+            <th th:text="${contest.getDescription()}"></th>
+            <th th:text="${contest.getStartTime()}"></th>
+            <th th:text="${contest.getEndTime()}"></th>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="col-md-2"></div>
+</body>
+</html>

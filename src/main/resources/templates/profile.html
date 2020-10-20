@@ -1,0 +1,113 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-09-23 19:28:05
+ * @LastEditTime: 2020-09-29 19:33:33
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /resources/templates/test.html
+-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>GerayOJ</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap-theme.css}">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"/>
+    <script th:src="@{/bootstrap/js/bootstrap.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">
+</head>
+
+<body>
+<div th:insert="header::navigation"></div>
+<div class="container" style="margin-top: 20px;">
+    <div style="float:left;padding: 20px;">
+        <img src="https://cdn.v2ex.com/gravatar/739aa23c010eed5a076d5476e5922d31" alt="头像">
+    </div>
+    <div style="text-align: left;">
+        <h3>Username</h3>
+        <span style="color: gray;">names</span>
+    </div>
+    <div class="">
+        <table class="table table-reflow problem-solve">
+            <tbody>
+            <tr>
+                <th class="table-active" scope="row">24 hours</th>
+                <td>
+                    <a href="">1</a>
+                </td>
+            </tr>
+            <tr>
+                <th class="table-active" scope="row">7 days</th>
+                <td>
+                    <a href="">1</a>
+                </td>
+            </tr>
+            <tr>
+                <th class="table-active" scope="row">30 days</th>
+                <td>
+                    <a href="">1</a>
+                </td>
+            </tr>
+            <tr>
+                <th class="table-active" scope="row">Overall solved</th>
+                <td>
+                    <a href="">1</a>
+                </td>
+            </tr>
+            <tr>
+                <th class="table-active" scope="row">Overall attempted</th>
+                <td>
+                    <a href="">1</a>
+                </td>
+            </tr>
+            <tr>
+                <th class="table-active" scope="row">Detail</th>
+                <td>
+                    <a href="#" class="toggle-detail" style="">Toggle</a>
+                </td>
+            </tr>
+            <tr>
+                <th class="table-active" scope="row">Export</th>
+                <td>
+                    <a href="">AC/</a>
+                    <a href="">ALL</a>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-md-12">
+        <div class="col-md-6 Submission">
+            <h2 style="float: left;">Submission</h2>
+            <div class="">
+                <table class="table table-striped">
+                    <thead>
+                    <tr class="row">
+                        <th>SubmissionId</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="row">
+                        <th>1</th>
+                        <th>Wait</th>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-6 Ability">
+            <h2 style="float:left">Ability</h2>
+            <div id="Ability"></div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

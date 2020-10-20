@@ -12,7 +12,12 @@ public class SecuityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .anyRequest().permitAll().and().logout().permitAll();//配置不需要登录验
+                .anyRequest()
+                .permitAll()
+                .and()
+                .logout()
+                .permitAll();//配置不需要登录验
         http.headers().frameOptions().sameOrigin();
+        http.csrf().disable();
     }
 }

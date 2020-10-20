@@ -1,19 +1,130 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-09-20 22:50:05
+ * @LastEditTime: 2020-10-16 20:38:38
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /resources/templates/index.html
+-->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>GerayOJ</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap-theme.css}">
-    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"/>
-    <script th:src="@{/bootstrap/js/bootstrap.js}"></script>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap-theme.css">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.js"></script>
+    <script src="/js/md5.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script src="/js/User.js"></script>
 
 </head>
 <body>
-<div th:insert="header::navigation"></div>
-<div class="jumbotron">
-    <h1>Welcome to gerayOJ</h1>
-</div>
+    <div th:insert="header::navigation"></div>
+    <div class="col-md-2 col-sm-0"> </div>
+    <div id="index-container" class="col-md-8 col-sm-12">
+        <div class="goj-content">
+            <!-- 公告通知栏 -->
+            <div class="panel">
+                <!-- 公告通知内容 -->
+                <div class="panel-body">
+                    <div class="panel-content col-md-9 col-sm-12">
+                        <table class="table">
+                            <thead>
+                                <th style="width: 50%;">公告</th>
+                                <th style="width: 25%;"></th>
+                                <th style="width: 25%;"></th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><a href="" style="float: left;">GOJ Round#1</a> </td>
+                                    <td>
+                                        by
+                                        <span style="color: greenyellow;">gerayking</span>
+                                    </td>
+                                    <td>
+                                        <span>2020-10-15 10:35:20</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><a href="" style="float: left;">GOJ Round#1</a> </td>
+                                    <td>
+                                        by
+                                        <span style="color: greenyellow;">gerayking</span>
+                                    </td>
+                                    <td>
+                                        <span>2020-10-15 10:35:20</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><a href="" style="float: left;">GOJ Round#1</a> </td>
+                                    <td>
+                                        by
+                                        <span style="color: greenyellow;">gerayking</span>
+                                    </td>
+                                    <td>
+                                        <span>2020-10-15 10:35:20</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: right;" colspan="233">
+                                        <a href="">更多公告...</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-xs-6 col-sm-4 col-md-3">
+                        <img src="../static/img/UOJ.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <!-- 排行榜 -->
+            <div class="ranklist col-md-12 col-sm-12">
+                <!-- 使用table来表示 -->
+                <div class="row">
+                    <h1 style="text-align: left;" ;>比赛排行榜</h1>
+                    <div class="rank-content">
+                        <table class="table table-bordered">
+                            <thead>
+                                <th style="width: 5em; text-align: center;">#</th>
+                                <th style="width: 14em; text-align: center;">用户名</th>
+                                <th style="width: 50em; text-align: center;">格言</th>
+                                <th style="width: 5em; text-align: center;">积分</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td style="color: rgb(129, 7, 7);">geray</td>
+                                    <td>你最喜欢做的事,才是你的天赋所在</td>
+                                    <td>2015</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>geray</td>
+                                    <td>你最喜欢做的事,才是你的天赋所在</td>
+                                    <td>2015</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>geray</td>
+                                    <td>你最喜欢做的事,才是你的天赋所在</td>
+                                    <td>2015</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="233"><a href="">查看全部...</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="col-md-2 col-sm-1"></div> -->
 </body>
+
 </html>

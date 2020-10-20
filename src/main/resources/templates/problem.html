@@ -1,46 +1,44 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-09-24 19:03:34
+ * @LastEditTime: 2020-10-16 22:39:36
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /resources/templates/problem.html
+-->
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <head>
-        <meta charset="UTF-8">
-        <title>GerayOJ</title>
-        <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap.css}">
-        <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap-theme.css}">
-        <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"/>
-        <script th:src="@{/bootstrap/js/bootstrap.js}"></script>
-        <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">
+        <head>
+            <meta charset="UTF-8">
+            <title>GerayOJ</title>
+            <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap.css">
+            <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap-theme.css">
+            <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+            <script src="../static/bootstrap/js/bootstrap.js"></script>
+            <script src="../static/showdown/bin/showdown.js"></script>
+            <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+        </head>
     </head>
 </head>
 <body>
-<div th:insert="header::navigation"></div>
-</div>
-<div class="col-md-3">
-    <button class="btn btn-primary btn-lg btn-middle">Submit</button>
-    <button class="btn btn-primary btn-lg btn-middle">MySubmission</button>
-    <button class="btn btn-primary btn-lg btn-middle">Star</button>
-</div>
-<div class="col-md-6 problem-containers">
-    <iframe src="/1.html" class="problem-iframe"  ></iframe>
-</div>
-<div class="col-md-3">
-    <div class="submission-list">
-        <table class="table table-striped">
-            <thead>
-            <tr class="row">
-                <th>SubmissionId</th>
-                <th>Status</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr class="row">
-                <th>1</th>
-                <th>Wait</th>
-            </tr>
-            </tbody>
-        </table>
+    <script>
+        $(function () {
+            show
+          })
+    </script>
+    <div class="col-md-2"></div>
+    <div class="col-md-8 problem">
+        <div class="problem-head">
+            <span>比赛题目</span>
+        </div>
+        <div class="problem-body">
+            <div id="problem-content"></div>
+        </div>
+        <div class="problem-tail"></div>
     </div>
-</div>
 </body>
 </html>

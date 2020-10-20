@@ -11,6 +11,7 @@ public class ProblemController {
     @RequestMapping("/{pid}")
     public String problem(@RequestParam(name = "pid",defaultValue = "0")int pid,
                           Model model){
+        model.addAttribute("room","problemlist");
         return "problem";
     }
 }

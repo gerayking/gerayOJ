@@ -1,29 +1,47 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-09-23 16:52:15
+ * @LastEditTime: 2020-10-20 17:44:32
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /resources/templates/header.html
+-->
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap-theme.css">
-    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"/>
-    <script src="../static/bootstrap/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.css">
+    <script src="/js/jquery.js"></script>
+    <script src="/bootstrap/js/bootstrap.js"></script>
+    <script src="/js/md5.js"></script>
 </head>
 <body>
 <div th:fragment="navigation">
     <script>
         function LoginUp(){
-            document.getElementById("login").setAttribute("style","display:block")
+            document.getElementById("login").setAttribute("style","display:block");
             document.getElementById("hidebg").style.display="block";
             document.getElementById("hidebg").style.height="1500px";
         }
         function LoginDown(){
-            document.getElementById("login").setAttribute("style","display:none")
+            document.getElementById("login").setAttribute("style","display:none");
+            document.getElementById("hidebg").style.display="none";
+        }
+        function registerUp(){  
+            document.getElementById("login").setAttribute("style","display:none");
+            document.getElementById("register").setAttribute("style","display:block");
+        }
+        function registerDown(){
+            document.getElementById("register").setAttribute("style","display:none");
             document.getElementById("hidebg").style.display="none";
         }
     </script>
     <div id="hidebg" class="hidebg"></div>
-<nav class="navbar navbar-default">
+    <nav class="navbar navbar-default">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -39,11 +57,17 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li th:classappend="${room} == 'current'?'active':'' "><a href="#">Contest<span class="sr-only">(current)</span></a></li>
+                <li th:classappend="${room} == 'contests'?'active':'' "><a href="/contest/">Contest<span class="sr-only">(current)</span></a></li>
                 <li th:classappend="${room} == 'problemlist'?'active':''"><a href="/problemlist">ProblemList</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#" onclick="LoginUp()">Load</a></li>
+                <li th:if="${session.user==null}">
+                    <a  href="#" onclick="LoginUp()">Load</a>
+                </li>
+                <li th:if="${session.user != null}">
+                    <span th:text="${session.user.getUsername()}"></span>
+                    <a href="/logout">Logout</a>
+                </li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -58,12 +82,12 @@
                     <form class="form model-content">
 
                         <div class="form-group" style="padding: .5rem .75rem;color: #373a3c">
-                            <label class="sr-only" for="exampleInputEmail3">Email address</label>
-                            <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Email">
+                            <label class="sr-only" for="loginUsername">Email address</label>
+                            <input type="text" class="form-control" id="loginUsername" placeholder="Username">
                         </div>
                         <div class="form-group" style="padding: .5rem .75rem;color: #373a3c">
-                            <label class="sr-only" for="exampleInputPassword3">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password">
+                            <label class="sr-only" for="loginPassword">Password</label>
+                            <input type="password" class="form-control" id="loginPassword" placeholder="Password">
                         </div>
                     </form>
                 </div>
@@ -71,14 +95,42 @@
                     <button type="button" class="btn btn-secondary float-xs-left" id="btn-forget-password">
                         Forget Password
                     </button>
+                    <button type="button" onclick="registerUp()" class="btn btn-secondary" data-dismiss="modal">Register</button>
                     <button type="button" onclick="LoginDown()" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary ">Sign in</button>
-
+                    <button type="submit" onclick="login()" class="btn btn-primary ">Sign in</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="register" style="display: none;" class="modal fade in">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>register</h2>
+                </div>
+                <div class="modal-body">
+                    <form class="form model-content">
+                        <div class="form-group" style="padding: .5rem .75rem;color: #373a3c">
+                            <label class="sr-only" for="registerEmail">Email address</label>
+                            <input type="email" class="form-control" id="registerEmail" placeholder="Email">
+                        </div>
+                        <div class="form-group" style="padding: .5rem .75rem;color: #373a3c">
+                            <label class="sr-only" for="registerUsername">Username</label>
+                            <input type="text" class="form-control" id="registerUsername" placeholder="Username">
+                        </div>
+                        <div class="form-group" style="padding: .5rem .75rem;color: #373a3c">
+                            <label class="sr-only" for="registerPassword">Password</label>
+                            <input type="password" class="form-control" id="registerPassword" placeholder="Password">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="registerDown()" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" onclick="register()" class="btn btn-primary ">Register</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 </body>
 </html>

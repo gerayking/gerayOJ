@@ -15,7 +15,7 @@ body {
     padding: 0px;
     text-align: center;
     height: 100%;
-    background: url(https://www.toptal.com/designers/subtlepatterns/patterns/funky-lines.png);
+    /*background: url(https://www.toptal.com/designers/subtlepatterns/patterns/funky-lines.png);*/
 }
 
 .hidebg { position:absolute;left:0px;top:0px;
@@ -51,4 +51,19 @@ body {
     width: 50%;
     display: block;
     margin-left: 25%
+}
+.profile-header{
+    padding-top: 50px;
+}
+.personalinfo li .title {color: #515365;float: left;font-weight: 500;margin-right: 30px;width: 30%;}
+.personalinfo li .text {color: #888da8;display: block;overflow: hidden;}
+.personalinfo li {margin-bottom: 10px;}
+.personalinfo {list-style: none;margin-bottom: 0;padding: 0;}
+.Submission {padding:0px}
+.Ability    {padding:20px}
+.user{
+    display: inline-block;
+}
+.avatar{
+    float: left;
 }
