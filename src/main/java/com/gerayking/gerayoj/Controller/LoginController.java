@@ -1,6 +1,8 @@
 package com.gerayking.gerayoj.Controller;
 
 import com.alibaba.fastjson.JSON;
+import com.gerayking.gerayoj.Service.RegexService;
+import com.gerayking.gerayoj.mapper.UserExtMapper;
 import com.gerayking.gerayoj.mapper.UserMapper;
 import com.gerayking.gerayoj.pojo.User;
 import com.gerayking.gerayoj.pojo.UserExample;
@@ -27,6 +29,10 @@ import java.util.Map;
 public class LoginController {
     @Autowired
     UserMapper userMapper;
+    @Autowired
+    UserExtMapper userExtMapper;
+    @Autowired
+    RegexService regexService;
     @RequestMapping("/login")
     @ResponseBody
     public String login(String username,
@@ -44,8 +50,7 @@ public class LoginController {
             UserExample userExample = new UserExample();
             userExample.createCriteria()
                     .andUsernameEqualTo(username);
-            List<User> users = userMapper.selectByExample(userExample);
-            User user = users.get(0);
+            User user = userMapper.selectByExample(userExample).get(0);
             request.getSession().setAttribute("user",user);
             return JSON.toJSONString(response);
         }else{
@@ -60,20 +65,23 @@ public class LoginController {
             @RequestParam("email") String email,
             @RequestParam("username") String username,
             @RequestParam("password") String password){
-        UserExample userExample = new UserExample();
-        userExample.createCriteria()
-                .andEmailEqualTo(email);
-        List<User> users = userMapper.selectByExample(userExample);
         Map<String,Object> response = new HashMap<>();
+        if(regexService.EmailCheck(email) == false){
+            response.put("status",201);
+            response.put("msg","邮箱错误");
+            return JSON.toJSONString(response);
+        }
+
+        User user = new User();
+        user.setUsername(username);
+        user.setEmail(email);
+        List<User> users = userExtMapper.selectByEamilOrUsername(user);
         // 如果不为空
         if(users.isEmpty() == false){
             response.put("status",201);
             response.put("msg","该邮箱已被注册");
             return JSON.toJSONString(response);
         }
-        User user = new User();
-        user.setUsername(username);
-        user.setEmail(email);
         user.setPassword(password);
         user.setNickname(username);
         userMapper.insert(user);
@@ -81,11 +89,10 @@ public class LoginController {
         response.put("msg","注册成功");
         return JSON.toJSONString(response);
     }
-    @RequestMapping("/logout")
-    public String logout(HttpServletRequest request){
+    @RequestMapping("/Logout")
+    public String logout(){
         Subject subject = SecurityUtils.getSubject();
-        subject.logout();
-        request.getSession().setAttribute("user",null);
+        if(subject.isAuthenticated())SecurityUtils.getSubject().logout();
         return "index";
     }
 }

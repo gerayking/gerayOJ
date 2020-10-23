@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<!-- KaTeX requires the use of the HTML5 doctype. Without it, KaTeX may not render properly -->
+<html>
+<head>
+    <link rel="stylesheet" href="../static/katex/katex.css">
+    <script src="../static/katex/katex.js"></script>
+    <script src="../static/katex/katex.mjs"></script>
+</head>
+<body>
+<div id="content"></div>
+</body>
+<script>
+    katex.render("c = \\pm\\sqrt{a^2 + b^2}",document.getElementById("content"), {
+        throwOnError: false
+    });
+</script>
+</html>

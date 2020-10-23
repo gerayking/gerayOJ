@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import sun.nio.cs.US_ASCII;
 
+import javax.security.auth.Subject;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,8 +22,8 @@ import java.util.List;
 public class IndexController {
     @Autowired
     UserMapper userMapper;
-    @RequestMapping("/test")
-    public String index(Model model, HttpRequest request){
+    @RequestMapping({"/","/index"})
+    public String index(Model model){
         return "index";
     }
     @RequestMapping("/problemlist")
