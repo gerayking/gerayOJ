@@ -22,7 +22,6 @@ public class ProblemController {
         byte[] filecontent = new byte[fileLenth.intValue()];
         inputStream.read(filecontent);
         String s = new String(filecontent);
-        System.out.println(s);
         model.addAttribute("room","problemlist");
         model.addAttribute("problemContent",s);
         return "problem";

@@ -1,42 +1,92 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-09-25 13:43:31
+ * @LastEditTime: 2020-10-26 19:16:00
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /resources/templates/contests.html
+-->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>GerayOJ</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap-theme.css}">
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"/>
     <script th:src="@{/bootstrap/js/bootstrap.js}"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">
+<!--    <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap.css">-->
+<!--    <link rel="stylesheet" type="text/css" th:href="../static/bootstrap/css/bootstrap-theme.css">-->
+<!--    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"/>-->
+<!--    <script th:src="../static/bootstrap/js/bootstrap.js"></script>-->
+<!--    <link rel="stylesheet" type="text/css" th:href="../static/css/login.css">-->
 
 </head>
+
 <body>
 <div th:insert="header::navigation"></div>
 <div class="col-md-2"></div>
 <div class="col-md-8">
-    <table class="table table-striped">
-        <thead>
-        <tr class="row">
-            <th>Cid</th>
-            <th>Title</th>
-            <th>description</th>
-            <th>StarTime</th>
-            <th>EndTime</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr class="row" th:each="contest,contestStat:${contests}">
-            <th th:text="${contest.getCID()}"></th>
-            <th>
-                <a th:href="'/contest/'+${contest.getCID()}" th:text="${contest.getTitle()}"></a>
-            </th>
-            <th th:text="${contest.getDescription()}"></th>
-            <th th:text="${contest.getStartTime()}"></th>
-            <th th:text="${contest.getEndTime()}"></th>
-        </tr>
-        </tbody>
-    </table>
+    <div class="goj-content">
+        <h4>正在进行或即将到来的比赛</h4>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped table-text-center">
+                <thead>
+                <tr>
+                    <th>比赛名称</th>
+                    <th style="width:15em;">开始时间</th>
+                    <th style="width:100px;">时长</th>
+                    <th style="width:100px;">报名人数</th>
+                    <th style="width:180px;">评价</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="text-center">
+                    <td colspan="233">无</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <h4>已结束的比赛</h4>
+        <table class="table table-bordered table-hover table-striped table-text-center">
+            <thead>
+            <tr>
+                <th>比赛名称</th>
+                <th style="width:15em;">开始时间</th>
+                <th style="width:100px;">时长</th>
+                <th style="width:100px;">报名人数</th>
+                <th style="width:180px;">评价</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><a href="/contest/56">Geray Hello OJ</a><sup><a style="color:grey"
+                                                                           href="/contest/56/standings">已结束</a></sup>
+                </td>
+                <td>
+                    <a href="https://www.timeanddate.com/worldclock/fixedtime.html?iso=20200813T0830&amp;p1=33&amp;ah=5">2020-08-13
+                        08:30:00</a></td>
+                <td>5 小时</td>
+                <td><a href="/contest/56/registrants"><span class="glyphicon glyphicon-user"></span> ×3980</a></td>
+                <td>
+                    <div class="text-left">
+                        <div class="uoj-click-zan-block uoj-click-zan-block-cur-zero uoj-click-zan-block-positive"
+                             data-id="56" data-type="C" data-val="0" data-cnt="102"><a href="#"
+                                                                                       class="uoj-click-zan-up"><span
+                                class="glyphicon glyphicon-thumbs-up"></span>好评</a><a href="#"
+                                                                                      class="uoj-click-zan-down"><span
+                                class="glyphicon glyphicon-thumbs-down"></span>差评</a><span
+                                class="uoj-click-zan-cnt">[<strong>+102</strong>]</span></div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 <div class="col-md-2"></div>
 </body>
+
 </html>
