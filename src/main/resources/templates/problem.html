@@ -45,7 +45,7 @@
 <div class="col-md-2"></div>
 <div class="col-md-8 problem">
     <div class="problem-head">
-        <h3 style="text-align: center;font-weight: bold">比赛题目标题</h3>
+        <h3 style="text-align: center;font-weight: bold" th:text="${problem.getTitle()}"></h3>
     </div>
     <div class="problem-body">
         <ul class="nav nav-tabs">
@@ -53,7 +53,7 @@
             <li role="presentation"><a href="#submit-content" data-toggle="tab">提交</a></li>
         </ul>
         <div class="tab-content" id="myTab">
-            <div  class="tab-pane fade in  problem-content active" id="problem-content">124</div>
+            <div  class="tab-pane fade in  problem-content  active" id="problem-content">124</div>
             <div  class="tab-pane submit-content "  id="submit-content">
                 <div class="form-group" id="form-group-answer_answer"><label class="col-sm-2 control-label">
                     <div class="text-left">源文件:answer</div>
@@ -106,11 +106,15 @@
 </div>
 </body>
 <script th:inline="javascript">
-    let problemContent = [[${ problemContent }]];
+    let problemContent = [[${ problem.getStatement() }]];
     markdown_text = marked(problemContent);
+    console.log(markdown_text);
     let target = $("#problem-content");
     target.html(markdown_text);
     RenderKatex(target);
+    $("table").each(function (){
+        $(this).addClass("table");
+    })
 </script>
 
 </html>

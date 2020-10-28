@@ -1,4 +1,4 @@
-package com.gerayking.gerayoj.Config;
+package com.gerayking.gerayoj.config;
 
 import com.gerayking.gerayoj.mapper.UserMapper;
 import com.gerayking.gerayoj.pojo.User;

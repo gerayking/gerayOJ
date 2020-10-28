@@ -1,0 +1,133 @@
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+
+CREATE TABLE IF NOT EXISTS `t_contest` (
+  `C_ID` int(10) NOT NULL AUTO_INCREMENT,
+  `C_TITLE` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `C_DESCRIPTION` text COLLATE utf8_unicode_ci,
+  `C_PASSWORD` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `C_BEGINTIME` datetime DEFAULT NULL,
+  `C_ENDTIME` datetime DEFAULT NULL,
+  `C_MANAGER_ID` int(10) DEFAULT NULL,
+  `C_HASH_CODE` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `C_REPLAY_STATUS_ID` int(10) unsigned DEFAULT NULL,
+  `C_ANNOUNCEMENT` text COLLATE utf8_unicode_ci,
+  `C_ENABLE_TIME_MACHINE` int(1) unsigned DEFAULT NULL,
+  PRIMARY KEY (`C_ID`),
+  KEY `Index_manager_id` (`C_MANAGER_ID`),
+  KEY `Index_hash_code` (`C_HASH_CODE`),
+  KEY `Index_replay_status_id` (`C_REPLAY_STATUS_ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=91 ;
+
+CREATE TABLE IF NOT EXISTS `t_cproblem` (
+  `C_ID` int(10) NOT NULL AUTO_INCREMENT,
+  `C_PROBLEM_ID` int(10) DEFAULT NULL,
+  `C_CONTEST_ID` int(10) DEFAULT NULL,
+  `C_NUM` varchar(2) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `C_TITLE` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `C_DESCRIPTION_ID` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`C_ID`),
+  KEY `Index_problem_id` (`C_PROBLEM_ID`),
+  KEY `Index_contest_id` (`C_CONTEST_ID`),
+  KEY `Index_description_id` (`C_DESCRIPTION_ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1165 ;
+
+CREATE TABLE IF NOT EXISTS `t_description` (
+  `C_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `C_DESCRIPTION` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `C_INPUT` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `C_OUTPUT` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `C_SAMPLEINPUT` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `C_SAMPLEOUTPUT` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `C_HINT` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `C_PROBLEM_ID` int(11) NOT NULL DEFAULT '0',
+  `C_UPDATE_TIME` datetime DEFAULT NULL,
+  `C_AUTHOR` varchar(100) DEFAULT NULL,
+  `C_REMARKS` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `C_VOTE` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`C_ID`),
+  KEY `Index_problem_id` (`C_PROBLEM_ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=500 ;
+
+CREATE TABLE IF NOT EXISTS `t_problem` (
+  `C_ID` int(10) NOT NULL AUTO_INCREMENT,
+  `C_TITLE` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `C_SOURCE` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `C_URL` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `C_originOJ` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `C_originProb` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `C_MEMORYLIMIT` int(10) DEFAULT NULL,
+  `C_TIMELIMIT` int(10) unsigned DEFAULT NULL,
+  `C_TRIGGER_TIME` datetime DEFAULT NULL,
+  PRIMARY KEY (`C_ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=499 ;
+
+CREATE TABLE IF NOT EXISTS `t_replay_status` (
+  `C_ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `C_DATA` mediumtext COLLATE utf8_unicode_ci,
+  PRIMARY KEY (`C_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `t_submission` (
+  `C_ID` int(10) NOT NULL AUTO_INCREMENT,
+  `C_STATUS` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `C_TIME` int(10) unsigned DEFAULT NULL,
+  `C_MEMORY` int(10) unsigned DEFAULT NULL,
+  `C_SUBTIME` datetime DEFAULT NULL,
+  `C_PROBLEM_ID` int(10) DEFAULT NULL,
+  `C_USER_ID` int(10) DEFAULT NULL,
+  `C_CONTEST_ID` int(10) DEFAULT NULL,
+  `C_LANGUAGE` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `C_SOURCE` text COLLATE utf8_unicode_ci,
+  `C_ISOPEN` int(10) DEFAULT NULL,
+  `C_DISP_LANGUAGE` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `C_USERNAME` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `C_ORIGIN_OJ` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `C_ORIGIN_PROB` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `C_IS_PRIVATE` int(10) unsigned DEFAULT '0',
+  `C_ADDITIONAL_INFO` text COLLATE utf8_unicode_ci,
+  `C_REAL_RUNID` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`C_ID`),
+  KEY `Index_problem_id` (`C_PROBLEM_ID`),
+  KEY `Index_user_id` (`C_USER_ID`),
+  KEY `Index_contest_id` (`C_CONTEST_ID`),
+  KEY `Index_username` (`C_USERNAME`),
+  KEY `Index_origin_prob` (`C_ORIGIN_PROB`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2084 ;
+
+CREATE TABLE IF NOT EXISTS `t_user` (
+  `C_ID` int(10) NOT NULL AUTO_INCREMENT,
+  `C_USERNAME` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `C_NICKNAME` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `C_PASSWORD` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `C_CREATETIME` datetime DEFAULT NULL,
+  `C_QQ` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `C_SCHOOL` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `C_EMAIL` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `C_BLOG` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
+  `C_SHARE` int(10) unsigned NOT NULL DEFAULT '1',
+  `C_SUP` int(10) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`C_ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=128 ;
+
+CREATE TABLE IF NOT EXISTS `t_vlog` (
+  `C_ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `C_SESSIONID` varchar(40) DEFAULT NULL,
+  `C_IP` varchar(40) DEFAULT NULL,
+  `C_CREATETIME` datetime DEFAULT NULL,
+  `C_DURATION` int(10) unsigned DEFAULT NULL,
+  `C_REFERER` varchar(500) DEFAULT NULL,
+  `C_USERAGENT` varchar(500) DEFAULT NULL,
+  `C_LOGINER` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`C_ID`),
+  KEY `Index_2` (`C_SESSIONID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

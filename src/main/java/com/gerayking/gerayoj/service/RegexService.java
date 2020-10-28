@@ -1,4 +1,4 @@
-package com.gerayking.gerayoj.Service;
+package com.gerayking.gerayoj.service;
 
 import org.springframework.stereotype.Service;
 

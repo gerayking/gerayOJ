@@ -1,7 +1,7 @@
-package com.gerayking.gerayoj.Controller;
+package com.gerayking.gerayoj.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.gerayking.gerayoj.Service.RegexService;
+import com.gerayking.gerayoj.service.RegexService;
 import com.gerayking.gerayoj.mapper.UserExtMapper;
 import com.gerayking.gerayoj.mapper.UserMapper;
 import com.gerayking.gerayoj.pojo.User;
@@ -10,17 +10,13 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

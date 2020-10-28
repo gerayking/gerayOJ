@@ -1,4 +1,4 @@
-package com.gerayking.gerayoj.Config;
+package com.gerayking.gerayoj.config;
 
 
 import org.springframework.context.annotation.Configuration;

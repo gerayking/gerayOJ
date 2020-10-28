@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>GerayOJ</title>
-        <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap.css}">
-        <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap-theme.css}">
-        <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"/>
-        <script th:src="@{/bootstrap/js/bootstrap.js}"></script>
-        <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap-theme.css}">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"/>
+    <script th:src="@{/bootstrap/js/bootstrap.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">
 
-<!--    <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap.css">-->
-<!--    <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap-theme.css">-->
-<!--    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"/>-->
-<!--    <script src="../static/bootstrap/js/bootstrap.js"></script>-->
-<!--    <link rel="stylesheet" type="text/css" href="../static/css/login.css">-->
+    <!--    <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap.css">-->
+    <!--    <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap-theme.css">-->
+    <!--    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"/>-->
+    <!--    <script src="../static/bootstrap/js/bootstrap.js"></script>-->
+    <!--    <link rel="stylesheet" type="text/css" href="../static/css/login.css">-->
 </head>
 <body>
 <div th:insert="header::navigation"></div>
@@ -22,102 +22,76 @@
     <div class="goj-content">
         <div class="row">
             <div class="col-sm-4 bot-buffer-sm">
-                <ul class="nav nav-pills" role="tablist"><li class="active"><a href="/problems" role="tab">总题库</a></li><li><a href="/problems/template" role="tab">模板题库</a></li></ul>	</div>
+                <ul class="nav nav-pills" role="tablist">
+                    <li class="active"><a href="/problems" role="tab">总题库</a></li>
+                    <li><a href="/problems/template" role="tab">模板题库</a></li>
+                </ul>
+            </div>
             <div class="col-sm-4 col-sm-push-4 text-right">
                 <form class="form-inline" method="get">
                     <div class="input-group">
                         <input type="text" class="form-control" name="search" placeholder="题目名 / ID / 标签" value="">
                         <div class="input-group-btn">
-                            <button type="submit" class="btn btn-search" id="submit-search"><span class="glyphicon glyphicon-search"></span></button>
+                            <button type="submit" class="btn btn-search" id="submit-search"><span
+                                    class="glyphicon glyphicon-search"></span></button>
                         </div>
                     </div>
                 </form>
                 <div class="checkbox">
-                    <label class="checkbox-inline" for="input-show_tags_mode"><input type="checkbox" id="input-show_tags_mode"> 显示标签</label>
-                    <label class="checkbox-inline" for="input-show_submit_mode"><input type="checkbox" id="input-show_submit_mode"> 显示提交情况</label>
+                    <label class="checkbox-inline" for="input-show_tags_mode"><input type="checkbox"
+                                                                                     id="input-show_tags_mode">
+                        显示标签</label>
+                    <label class="checkbox-inline" for="input-show_submit_mode"><input type="checkbox"
+                                                                                       id="input-show_submit_mode">
+                        显示提交情况</label>
                 </div>
             </div>
             <div class="col-sm-4 col-sm-pull-4">
-                <div class="text-center"><ul class="pagination top-buffer-no bot-buffer-sm"><li class="disabled"><a><span class="glyphicon glyphicon glyphicon-backward"></span></a></li><li class="active"><a href="/problems">1</a></li><li><a href="/problems?page=2">2</a></li><li><a href="/problems?page=3">3</a></li><li><a href="/problems?page=4">4</a></li><li><a href="/problems?page=5">5</a></li><li><a href="/problems?page=6">6</a></li><li><a href="/problems?page=2"><span class="glyphicon glyphicon glyphicon-forward"></span></a></li></ul></div>	</div>
+                <div class="text-center">
+                    <ul class="pagination top-buffer-no bot-buffer-sm">
+                            <li th:class="${currentPage==1?'disabled':''}"><a th:href="'/problemlist/' + ${currentPage==1?1 : currentPage - 1 }"><span class="glyphicon glyphicon glyphicon-backward"></span></a></li>
+<!--                            <li th:class="${pager.getCurrent() == i?'active':''}"><a th:href="'/problems/'+i">1</a></li>-->
+                            <li th:each="i:${#numbers.sequence(pagemin,pagemax)}">
+                                <a th:href="'/problemlist/'+${i}" th:text="${i}"></a>
+                            </li>
+<!--                            <li><a href="/problems/2">2</a></li>-->
+<!--                            <li><a href="/problems?page=3">3</a></li>-->
+<!--                            <li><a href="/problems?page=4">4</a></li>-->
+<!--                            <li><a href="/problems?page=5">5</a></li>-->
+<!--                            <li><a href="/problems?page=6">6</a></li>-->
+                            <li th:class="${currentPage==pager.getTotal()?'disabled':''}"><a th:href="'/problemlist/' + ${currentPage==pager.getTotal()?currentPage:currentPage+1}"><span class="glyphicon glyphicon glyphicon-forward"></span></a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-    <div class="table-responsive">
-        <table class="table table-bordered table-hover table-striped">
-            <thead>
-            <tr>
-                <th class="text-center" style="width:5em;">ID</th>
-                <th>题目</th>
-                <th class="text-center" style="width:180px;">评价</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr class="text-center">
-                <td>#1</td>
-                <td class="text-left"><a href="/problem/1">A + B Problem</a></td>
-                <td class="text-left">
-                    <div class="uoj-click-zan-block uoj-click-zan-block-cur-zero uoj-click-zan-block-positive"
-                         data-id="1" data-type="P" data-val="0" data-cnt="1917"><a href="#"
-                                                                                   class="uoj-click-zan-up"><span
-                            class="glyphicon glyphicon-thumbs-up"></span>好评</a><a href="#"
-                                                                                  class="uoj-click-zan-down"><span
-                            class="glyphicon glyphicon-thumbs-down"></span>差评</a><span
-                            class="uoj-click-zan-cnt">[<strong>+1917</strong>]</span></div>
-                </td>
-            </tr>
-            <tr class="text-center">
-                <td>#2</td>
-                <td class="text-left"><a href="/problem/2">【NOI2014】起床困难综合症</a></td>
-                <td class="text-left">
-                    <div class="uoj-click-zan-block uoj-click-zan-block-cur-zero uoj-click-zan-block-positive"
-                         data-id="2" data-type="P" data-val="0" data-cnt="446"><a href="#"
-                                                                                  class="uoj-click-zan-up"><span
-                            class="glyphicon glyphicon-thumbs-up"></span>好评</a><a href="#"
-                                                                                  class="uoj-click-zan-down"><span
-                            class="glyphicon glyphicon-thumbs-down"></span>差评</a><span
-                            class="uoj-click-zan-cnt">[<strong>+446</strong>]</span></div>
-                </td>
-            </tr>
-            <tr class="text-center">
-                <td>#3</td>
-                <td class="text-left"><a href="/problem/3">【NOI2014】魔法森林</a></td>
-                <td class="text-left">
-                    <div class="uoj-click-zan-block uoj-click-zan-block-cur-zero uoj-click-zan-block-positive"
-                         data-id="3" data-type="P" data-val="0" data-cnt="336"><a href="#"
-                                                                                  class="uoj-click-zan-up"><span
-                            class="glyphicon glyphicon-thumbs-up"></span>好评</a><a href="#"
-                                                                                  class="uoj-click-zan-down"><span
-                            class="glyphicon glyphicon-thumbs-down"></span>差评</a><span
-                            class="uoj-click-zan-cnt">[<strong>+336</strong>]</span></div>
-                </td>
-            </tr>
-            <tr class="text-center">
-                <td>#4</td>
-                <td class="text-left"><a href="/problem/4">【NOI2014】消除游戏</a></td>
-                <td class="text-left">
-                    <div class="uoj-click-zan-block uoj-click-zan-block-cur-zero uoj-click-zan-block-positive"
-                         data-id="4" data-type="P" data-val="0" data-cnt="154"><a href="#"
-                                                                                  class="uoj-click-zan-up"><span
-                            class="glyphicon glyphicon-thumbs-up"></span>好评</a><a href="#"
-                                                                                  class="uoj-click-zan-down"><span
-                            class="glyphicon glyphicon-thumbs-down"></span>差评</a><span
-                            class="uoj-click-zan-cnt">[<strong>+154</strong>]</span></div>
-                </td>
-            </tr>
-            <tr class="text-center">
-                <td>#5</td>
-                <td class="text-left"><a href="/problem/5">【NOI2014】动物园</a></td>
-                <td class="text-left">
-                    <div class="uoj-click-zan-block uoj-click-zan-block-cur-zero uoj-click-zan-block-positive"
-                         data-id="5" data-type="P" data-val="0" data-cnt="269"><a href="#"
-                                                                                  class="uoj-click-zan-up"><span
-                            class="glyphicon glyphicon-thumbs-up"></span>好评</a><a href="#"
-                                                                                  class="uoj-click-zan-down"><span
-                            class="glyphicon glyphicon-thumbs-down"></span>差评</a><span
-                            class="uoj-click-zan-cnt">[<strong>+269</strong>]</span></div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                <tr>
+                    <th class="text-center" style="width:5em;">ID</th>
+                    <th>题目</th>
+                    <th class="text-center" style="width:180px;">评价</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="problem,problemStat: ${problems}" class="text-center">
+                    <td th:text="'#' + ${problemStat.count}">#1</td>
+                    <td class="text-left"><a th:href="'/problem/'+${problemStat.count}" th:text="${problem.getTitle()}">A
+                        + B Problem</a></td>
+                    <td class="text-left">
+                        <div class="uoj-click-zan-block uoj-click-zan-block-cur-zero uoj-click-zan-block-positive"
+                             data-id="1" data-type="P" data-val="0" data-cnt="1917"><a href="#"
+                                                                                       class="uoj-click-zan-up"><span
+                                class="glyphicon glyphicon-thumbs-up"></span>好评</a><a href="#"
+                                                                                      class="uoj-click-zan-down"><span
+                                class="glyphicon glyphicon-thumbs-down"></span>差评</a><span
+                                class="uoj-click-zan-cnt">[<strong>+1917</strong>]</span></div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 <div class="col-md-2"></div>
