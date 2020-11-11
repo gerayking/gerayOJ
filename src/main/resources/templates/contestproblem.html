@@ -19,42 +19,48 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/styles/default.min.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src='https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js'></script>
-<!--    <link rel="stylesheet" href="..static/katex/katex.css">
-    <script src="../static/katex/katex.js"></script>
+    <!--    <link rel="stylesheet" href="..static/katex/katex.css">
+        <script src="../static/katex/katex.js"></script>
 
-    <script src="../static/js/markdown.js"></script>
-    <script src="../static/katex/katex.mjs"></script>
-    <script src="../static/bootstrap/js/bootstrap.js"></script>
-    <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap-theme.css">
-    <link rel="stylesheet" href="../static/css/style.css">-->
-            <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css">
-            <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap-theme.css">
-            <script src="/katex/katex.js"  type="text/javascript"></script>
-            <script src="/js/markdown.js" type="text/javascript"></script>
-            <script src="/bootstrap/js/bootstrap.js" type="text/javascript"></script>
-            <link rel="stylesheet" type="text/css" href="/css/style.css">
-            <link rel="stylesheet" href="/css/style.css">
-            <link rel="stylesheet" href="/katex/katex.css">
+        <script src="../static/js/markdown.js"></script>
+        <script src="../static/katex/katex.mjs"></script>
+        <script src="../static/bootstrap/js/bootstrap.js"></script>
+        <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap-theme.css">
+        <link rel="stylesheet" href="../static/css/style.css">-->
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap-theme.css">
+    <script src="/katex/katex.js" type="text/javascript"></script>
+    <script src="/js/markdown.js" type="text/javascript"></script>
+    <script src="/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/katex/katex.css">
 
 </head>
 
 <body>
 <div th:insert="header::navigation"></div>
 
-<div class="col-md-2"></div>
+<div class="col-md-2">
+    <div style="margin-top: 20px">
+        <a th:if="${preid} != -1" th:href="'/contest/'+${cid}+'/problem/'+${preid}"><button class="btn btn-default">上一题</button></a>
+        <a th:href="'/contest/'+${cid}"><button class="btn btn-default">回到比赛</button></a>
+        <a th:if="${sufid} != -1" th:href="'/contest/'+${cid}+'/problem/'+${sufid}"><button class="btn btn-default">下一题</button></a>
+    </div>
+</div>
 <div class="col-md-8 problem">
     <div class="problem-head">
         <h3 style="text-align: center;font-weight: bold" th:text="${problem.getTitle()}"></h3>
     </div>
     <div class="problem-body">
         <ul class="nav nav-tabs">
-            <li role="presentation" class="active" ><a href="#problem-content" data-toggle="tab">题目</a></li>
+            <li role="presentation" class="active"><a href="#problem-content" data-toggle="tab">题目</a></li>
             <li role="presentation"><a href="#submit-content" data-toggle="tab">提交</a></li>
         </ul>
         <div class="tab-content" id="myTab">
-            <div  class="tab-pane fade in  problem-content  active" id="problem-content">124</div>
-            <div  class="tab-pane submit-content "  id="submit-content">
+            <div class="tab-pane fade in  problem-content  active" id="problem-content">124</div>
+            <div class="tab-pane submit-content " id="submit-content">
                 <div class="form-group" id="form-group-answer_answer"><label class="col-sm-2 control-label">
                     <div class="text-left">源文件:answer</div>
                 </label><label class="col-sm-1 control-label" form="answer_answer_language">语言</label>
@@ -112,7 +118,7 @@
     let target = $("#problem-content");
     target.html(markdown_text);
     RenderKatex(target);
-    $("table").each(function (){
+    $("table").each(function () {
         $(this).addClass("table");
     })
 </script>

@@ -49,18 +49,17 @@
             <div class="col-sm-4 col-sm-pull-4">
                 <div class="text-center">
                     <ul class="pagination top-buffer-no bot-buffer-sm">
-                            <li th:class="${currentPage==1?'disabled':''}"><a th:href="'/problemlist/' + ${currentPage==1?1 : currentPage - 1 }"><span class="glyphicon glyphicon glyphicon-backward"></span></a></li>
-<!--                            <li th:class="${pager.getCurrent() == i?'active':''}"><a th:href="'/problems/'+i">1</a></li>-->
-                            <li th:each="i:${#numbers.sequence(pagemin,pagemax)}">
-                                <a th:href="'/problemlist/'+${i}" th:text="${i}"></a>
-                            </li>
-<!--                            <li><a href="/problems/2">2</a></li>-->
-<!--                            <li><a href="/problems?page=3">3</a></li>-->
-<!--                            <li><a href="/problems?page=4">4</a></li>-->
-<!--                            <li><a href="/problems?page=5">5</a></li>-->
-<!--                            <li><a href="/problems?page=6">6</a></li>-->
-                            <li th:class="${currentPage==pager.getTotal()?'disabled':''}"><a th:href="'/problemlist/' + ${currentPage==pager.getTotal()?currentPage:currentPage+1}"><span class="glyphicon glyphicon glyphicon-forward"></span></a>
-                            </li>
+                        <li th:class="${currentPage==1?'disabled':''}"><a
+                                th:href="'/problemlist/' + ${currentPage==1?1 : currentPage - 1 }"><span
+                                class="glyphicon glyphicon glyphicon-backward"></span></a></li>
+                        <!--                            <li th:class="${pager.getCurrent() == i?'active':''}"><a th:href="'/problems/'+i">1</a></li>-->
+                        <li th:each="i:${#numbers.sequence(pagemin,pagemax)}">
+                            <a th:href="'/problemlist/'+${i}" th:text="${i}"></a>
+                        </li>
+                        <li th:class="${currentPage==pager.getTotal()?'disabled':''}"><a
+                                th:href="'/problemlist/' + ${currentPage==pager.getTotal()?currentPage:currentPage+1}"><span
+                                class="glyphicon glyphicon glyphicon-forward"></span></a>
+                        </li>
                     </ul>
                 </div>
             </div>

@@ -4,10 +4,7 @@ import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
-import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
-import com.baomidou.mybatisplus.generator.config.GlobalConfig;
-import com.baomidou.mybatisplus.generator.config.PackageConfig;
-import com.baomidou.mybatisplus.generator.config.StrategyConfig;
+import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.po.TableFill;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
@@ -30,7 +27,7 @@ public class Mybatisplusgenerator {
         mpg.setGlobalConfig(gc);
         // 配置数据源
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://localhost:3306/gojtest");
+        dsc.setUrl("jdbc:mysql://localhost:3306/gojtest?serverTimezone=Asia/Shanghai");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("709508");
@@ -45,18 +42,16 @@ public class Mybatisplusgenerator {
         pc.setController("controller");
         pc.setMapper("mapper");
         mpg.setPackageInfo(pc);
+        // 模板配置
+        TemplateConfig tlc = new TemplateConfig();
+        tlc.setController(null);
+        tlc.setService(null);
+        tlc.setServiceImpl(null);
+        mpg.setTemplate(tlc);
         // 策略配置
         // 策略配置
         StrategyConfig strategy = new StrategyConfig();
-        strategy.setInclude("contests","contests_notice",
-                "contests_permissions",
-                "contests_problems",
-                "contests_registrants",
-                "contests_submissions",
-                "problems",
-                "problems_tags",
-                "submissions",
-                "user_info");// 设置要映射的表名
+        strategy.setInclude("contest_question");// 设置要映射的表名
         strategy.setNaming(NamingStrategy.underline_to_camel); // 类驼峰命名
         strategy.setColumnNaming(NamingStrategy.underline_to_camel); // 属性驼峰命名
         strategy.setEntityLombokModel(true);// lombok

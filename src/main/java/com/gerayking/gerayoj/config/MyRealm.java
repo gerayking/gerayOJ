@@ -1,19 +1,17 @@
 package com.gerayking.gerayoj.config;
 
-import com.gerayking.gerayoj.mapper.UserMapper;
-import com.gerayking.gerayoj.pojo.User;
-import com.gerayking.gerayoj.pojo.UserExample;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.gerayking.gerayoj.mapper.UserInfoMapper;
+import com.gerayking.gerayoj.pojo.UserInfo;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.List;
-
 public class MyRealm extends AuthorizingRealm {
     @Autowired
-    UserMapper userMapper;
+    UserInfoMapper userInfoMapper;
     // 授权
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
@@ -32,11 +30,10 @@ public class MyRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         String username = (String)authenticationToken.getPrincipal();
-        UserExample userExample = new UserExample();
-        userExample.createCriteria()
-                .andUsernameEqualTo(username);
-        List<User> users = userMapper.selectByExample(userExample);
-        String password = users.get(0).getPassword();
+        QueryWrapper<UserInfo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("username",username);
+        UserInfo user = userInfoMapper.selectOne(queryWrapper);
+        String password = user.getPassword();
         return new SimpleAuthenticationInfo(username,password,getName());
     }
 }

@@ -2,4 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gerayking.gerayoj.mapper.ContestsMapper">
 
+    <select id="getContestProblem" parameterType="java.lang.Integer"  resultType="java.util.ArrayList">
+        select problem_id where contest_id = #{cid}
+    </select>
 </mapper>

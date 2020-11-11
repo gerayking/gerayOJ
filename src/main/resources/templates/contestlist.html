@@ -12,16 +12,16 @@
 <head>
     <meta charset="UTF-8">
     <title>GerayOJ</title>
-        <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap-theme.css}">
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"/>
     <script th:src="@{/bootstrap/js/bootstrap.js}"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">
-<!--    <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap.css">-->
-<!--    <link rel="stylesheet" type="text/css" th:href="../static/bootstrap/css/bootstrap-theme.css">-->
-<!--    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"/>-->
-<!--    <script th:src="../static/bootstrap/js/bootstrap.js"></script>-->
-<!--    <link rel="stylesheet" type="text/css" th:href="../static/css/login.css">-->
+    <!--    <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap.css">-->
+    <!--    <link rel="stylesheet" type="text/css" th:href="../static/bootstrap/css/bootstrap-theme.css">-->
+    <!--    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"/>-->
+    <!--    <script th:src="../static/bootstrap/js/bootstrap.js"></script>-->
+    <!--    <link rel="stylesheet" type="text/css" th:href="../static/css/login.css">-->
 
 </head>
 
@@ -43,8 +43,27 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr class="text-center">
-                    <td colspan="233">无</td>
+                <tr th:each="contest:${comingContests}">
+                    <td><a th:href="'/contest/' + ${contest.getId()}" th:text="${contest.getName()}"></a><sup><a
+                            style="color:grey"
+                            th:href="'/contest/'+${contest.getId()}+'/standings/'" th:text="${contest.getStatus()}"></a></sup>
+                    </td>
+                    <td>
+                        <a href="https://www.timeanddate.com/worldclock/fixedtime.html?iso=20200813T0830&amp;p1=33&amp;ah=5" th:text="${contest.getStartTime()}"></a></td>
+                    <td th:text="${contest.getLastMin()/60 + ' 小时'}"></td>
+                    <td><a th:href="'/contest/'+${contest.getId()}+'/registrants'"><span
+                            class="glyphicon glyphicon-user"></span> ×<span th:text="${contest.getPlayerNum()}"></span></a></td>
+                    <td>
+                        <div class="text-left">
+                            <div class="uoj-click-zan-block uoj-click-zan-block-cur-zero uoj-click-zan-block-positive"
+                                 data-id="56" data-type="C" data-val="0" data-cnt="102"><a href="#"
+                                                                                           class="uoj-click-zan-up"><span
+                                    class="glyphicon glyphicon-thumbs-up"></span>好评</a><a href="#"
+                                                                                          class="uoj-click-zan-down"><span
+                                    class="glyphicon glyphicon-thumbs-down"></span>差评</a><span
+                                    class="uoj-click-zan-cnt">[<strong>+102</strong>]</span></div>
+                        </div>
+                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -61,15 +80,17 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td><a href="/contest/56">Geray Hello OJ</a><sup><a style="color:grey"
-                                                                           href="/contest/56/standings">已结束</a></sup>
+            <tr th:each="contest:${pastContests}">
+                <td><a th:href="'/contest/' + ${contest.getId()}" th:text="${contest.getName()}"></a><sup><a
+                        style="color:grey"
+                        th:href="'/contest/'+${contest.getId()}+'/standings/'"
+                        th:text="${contest.getStatus()}"></a></sup>
                 </td>
                 <td>
-                    <a href="https://www.timeanddate.com/worldclock/fixedtime.html?iso=20200813T0830&amp;p1=33&amp;ah=5">2020-08-13
-                        08:30:00</a></td>
-                <td>5 小时</td>
-                <td><a href="/contest/56/registrants"><span class="glyphicon glyphicon-user"></span> ×3980</a></td>
+                    <a href="https://www.timeanddate.com/worldclock/fixedtime.html?iso=20200813T0830&amp;p1=33&amp;ah=5" th:text="${contest.getStartTime()}"></a></td>
+                <td th:text="${contest.getLastMin()/60 + ' 小时'}"></td>
+                <td><a th:href="'/contest/'+${contest.getId()}+'/registrants'"><span
+                        class="glyphicon glyphicon-user"></span> ×<span th:text="${contest.getPlayerNum()}"></span></a></td>
                 <td>
                     <div class="text-left">
                         <div class="uoj-click-zan-block uoj-click-zan-block-cur-zero uoj-click-zan-block-positive"

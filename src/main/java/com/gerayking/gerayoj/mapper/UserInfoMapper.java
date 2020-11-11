@@ -2,6 +2,7 @@ package com.gerayking.gerayoj.mapper;
 
 import com.gerayking.gerayoj.pojo.UserInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.springframework.stereotype.Repository;
 
 /**
  * <p>
@@ -11,6 +12,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author gerayKing
  * @since 2020-10-28
  */
+@Repository
 public interface UserInfoMapper extends BaseMapper<UserInfo> {
 
 }

@@ -8,35 +8,34 @@
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"/>
     <script th:src="@{/bootstrap/js/bootstrap.js}"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">
-    <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" th:href="../static/bootstrap/css/bootstrap-theme.css">
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap-theme.css}">
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"/>
-    <script th:src="../static/bootstrap/js/bootstrap.js"></script>
-    <link rel="stylesheet" type="text/css" th:href="../static/css/login.css">
+    <script th:src="@{/bootstrap/js/bootstrap.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap-theme.css">
+    <script src="/bootstrap/js/bootstrap.js" type="text/javascript"></script>
 
 </head>
-<body>
+
 <body role="document" style="">
+<div th:insert="header::navigation"></div>
 <div class="container theme-showcase" role="main">
 
     <div class="uoj-content">
         <div class="text-center">
-            <h1>2020年“美团杯”程序设计挑战赛之测试赛</h1>
-            <div class="uoj-click-zan-block uoj-click-zan-block-cur-zero uoj-click-zan-block-positive" data-id="52"
-                 data-type="C" data-val="0" data-cnt="132"><a href="#" class="uoj-click-zan-up"><span
-                    class="glyphicon glyphicon-thumbs-up"></span>好评</a><a href="#" class="uoj-click-zan-down"><span
-                    class="glyphicon glyphicon-thumbs-down"></span>差评</a><span
-                    class="uoj-click-zan-cnt">[<strong>+132</strong>]</span></div>
+            <h1 th:text="${contest.getName()}"></h1>
         </div>
         <div class="row">
             <div class="col-sm-9">
                 <ul class="nav nav-tabs" role="tablist">
-                    <li class="active"><a href="/contest/52" role="tab">比赛主页</a></li>
-                    <li><a href="/contest/52/submissions" role="tab">提交记录</a></li>
-                    <li><a href="/contest/52/standings" role="tab">排行榜</a></li>
+                    <li role="presentation" class="active"><a href="#contest" data-toggle="tab">比赛主页</a></li>
+                    <li role="presentation"><a href="#submission" data-toggle="tab">提交记录</a></li>
+                    <li role="presentation"><a href="#standings" data-toggle="tab">排行榜</a></li>
                 </ul>
-                <div class="top-buffer-md">
-                    <div class="table-responsive">
+                <div class="tab-content">
+                    <div class="tab-pane table-responsive active" id="contest">
                         <table class="table table-bordered table-hover table-striped table-text-center">
                             <thead>
                             <tr>
@@ -45,22 +44,2449 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>A</td>
-                                <td><a href="/contest/52/problem/516">【美团杯2020测试赛】子序列</a></td>
+                            <tr id="problems" th:each="problem,problemStat:${problems}">
+                                <td th:data-id="${problemStat.count}"></td>
+                                <td th:data-id="-1"><a
+                                        th:href="'/contest/'+${contest.getId()}+'/problem/'+${problem.getId()}"
+                                        th:text="${problem.getTitle()}"></a></td>
                             </tr>
+                        </table>
+                    </div>
+                    <div class="tab-pane " id="submission">
+                        <table class="table table-bordered table-hover table-striped table-text-center">
+                            <thead>
                             <tr>
-                                <td>B</td>
-                                <td><a href="/contest/52/problem/517">【美团杯2020测试赛】交互测试</a></td>
+                                <th>ID</th>
+                                <th>题目</th>
+                                <th>提交者</th>
+                                <th>结果</th>
+                                <th>用时</th>
+                                <th>内存</th>
+                                <th>语言</th>
+                                <th>文件大小</th>
+                                <th>提交时间</th>
                             </tr>
-                            <tr>
-                                <td>C</td>
-                                <td><a href="/contest/52/problem/518">【美团杯2020测试赛】系统测试</a></td>
+                            </thead>
+                            <tbody>
+                            <tr class="text-center">
+                                <td colspan="233">无</td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
-
+                    <div class="tab-pane" id="standings">
+                        <table class="table table-bordered table-striped table-text-center table-vertical-middle table-condensed">
+                            <thead>
+                            <tr>
+                                <th style="width:5em">#</th>
+                                <th style="width:14em">用户名</th>
+                                <th style="width:5em">总分</th>
+                                <th style="width:8em;"><a href="/contest/56/problem/552">A</a></th>
+                                <th style="width:8em;"><a href="/contest/56/problem/553">B</a></th>
+                                <th style="width:8em;"><a href="/contest/56/problem/554">C</a></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/ilnil"
+                                       style="color:rgb(68,189,138)">ilnil</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(143,230,0)">263</span>
+                                    </div>
+                                    <div>14:54:53</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424789" class="uoj-score"
+                                            style="color:rgb(184,230,0)">70</a></div>
+                                    <div>4:57:04</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424802" class="uoj-score"
+                                            style="color:rgb(0,204,0)">100</a></div>
+                                    <div>4:57:52</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424843" class="uoj-score"
+                                            style="color:rgb(131,230,0)">93</a></div>
+                                    <div>4:59:57</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/skip2004"
+                                       style="color:rgb(81,208,53)">skip2004</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(151,230,0)">253</span>
+                                    </div>
+                                    <div>10:35:35</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424652" class="uoj-score"
+                                            style="color:rgb(0,204,0)">100</a></div>
+                                    <div>4:47:10</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423362" class="uoj-score"
+                                            style="color:rgb(0,204,0)">100</a></div>
+                                    <div>1:32:35</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424418" class="uoj-score"
+                                            style="color:rgb(223,230,0)">53</a></div>
+                                    <div>4:15:50</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/fuyuki"
+                                       style="color:rgb(63,196,103)">fuyuki</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(164,230,0)">235</span>
+                                    </div>
+                                    <div>9:03:22</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423870" class="uoj-score"
+                                            style="color:rgb(184,230,0)">70</a></div>
+                                    <div>2:53:01</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423291" class="uoj-score"
+                                            style="color:rgb(0,204,0)">100</a></div>
+                                    <div>1:13:33</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424783" class="uoj-score"
+                                            style="color:rgb(195,230,0)">65</a></div>
+                                    <div>4:56:48</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/disangan233"
+                                       style="color:rgb(72,183,162)">disangan233</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(167,230,0)">232</span>
+                                    </div>
+                                    <div>11:52:30</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424791" class="uoj-score"
+                                            style="color:rgb(184,230,0)">70</a></div>
+                                    <div>4:57:14</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424253" class="uoj-score"
+                                            style="color:rgb(0,204,0)">100</a></div>
+                                    <div>3:53:07</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423922" class="uoj-score"
+                                            style="color:rgb(202,230,0)">62</a></div>
+                                    <div>3:02:09</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/lyx_cjz"
+                                       style="color:rgb(65,194,115)">lyx_cjz</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(187,230,0)">206</span>
+                                    </div>
+                                    <div>12:51:50</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424472" class="uoj-score"
+                                            style="color:rgb(184,230,0)">70</a></div>
+                                    <div>4:22:50</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424090" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>3:29:40</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424827" class="uoj-score"
+                                            style="color:rgb(135,230,0)">91</a></div>
+                                    <div>4:59:20</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/zhouzhendong"
+                                       style="color:rgb(59,202,68)">zhouzhendong</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(190,230,0)">202</span>
+                                    </div>
+                                    <div>7:54:11</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423310" class="uoj-score"
+                                            style="color:rgb(0,204,0)">100</a></div>
+                                    <div>1:18:33</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423745" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>2:35:44</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424301" class="uoj-score"
+                                            style="color:rgb(213,230,0)">57</a></div>
+                                    <div>3:59:54</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/Itst"
+                                       style="color:rgb(89,210,52)">Itst</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(190,230,0)">201</span>
+                                    </div>
+                                    <div>10:54:30</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423345" class="uoj-score"
+                                            style="color:rgb(218,230,0)">55</a></div>
+                                    <div>1:26:54</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424556" class="uoj-score"
+                                            style="color:rgb(0,204,0)">100</a></div>
+                                    <div>4:33:43</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424745" class="uoj-score"
+                                            style="color:rgb(230,220,0)">46</a></div>
+                                    <div>4:53:53</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/xuyixuan"
+                                       style="color:rgb(115,214,48)">xuyixuan</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(192,230,0)">199</span>
+                                    </div>
+                                    <div>9:33:36</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423383" class="uoj-score"
+                                            style="color:rgb(0,204,0)">100</a></div>
+                                    <div>1:36:03</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423904" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>2:59:45</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424799" class="uoj-score"
+                                            style="color:rgb(220,230,0)">54</a></div>
+                                    <div>4:57:48</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/p_b_p_b"
+                                       style="color:rgb(75,175,178)">p_b_p_b</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(196,230,0)">194</span>
+                                    </div>
+                                    <div>7:43:27</div>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <div><a href="/submission/423813" class="uoj-score"
+                                            style="color:rgb(0,204,0)">100</a></div>
+                                    <div>2:43:54</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424834" class="uoj-score"
+                                            style="color:rgb(129,230,0)">94</a></div>
+                                    <div>4:59:33</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/orbitingflea"
+                                       style="color:rgb(86,209,52)">orbitingflea</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(196,230,0)">194</span>
+                                    </div>
+                                    <div>10:56:20</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423322" class="uoj-score"
+                                            style="color:rgb(0,204,0)">100</a></div>
+                                    <div>1:21:05</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424806" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>4:58:02</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424579" class="uoj-score"
+                                            style="color:rgb(230,227,0)">49</a></div>
+                                    <div>4:37:13</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>11</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/TheToadologist"
+                                       style="color:rgb(69,188,142)">TheToadologist</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(197,230,0)">192</span>
+                                    </div>
+                                    <div>9:21:14</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423852" class="uoj-score"
+                                            style="color:rgb(0,204,0)">100</a></div>
+                                    <div>2:50:05</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423369" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>1:33:51</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424792" class="uoj-score"
+                                            style="color:rgb(230,223,0)">47</a></div>
+                                    <div>4:57:18</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>12</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/zhangzy"
+                                       style="color:rgb(80,208,53)">zhangzy</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(198,230,0)">191</span>
+                                    </div>
+                                    <div>9:18:22</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424729" class="uoj-score"
+                                            style="color:rgb(0,204,0)">100</a></div>
+                                    <div>4:52:54</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423568" class="uoj-score" style="color:rgb(204,0,0)">0</a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424491" class="uoj-score"
+                                            style="color:rgb(135,230,0)">91</a></div>
+                                    <div>4:25:28</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>13</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/JiuTianYiKou"
+                                       style="color:rgb(62,197,98)">JiuTianYiKou</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(206,230,0)">181</span>
+                                    </div>
+                                    <div>10:27:06</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424372" class="uoj-score"
+                                            style="color:rgb(230,195,0)">35</a></div>
+                                    <div>4:10:10</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423539" class="uoj-score"
+                                            style="color:rgb(0,204,0)">100</a></div>
+                                    <div>2:02:29</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424403" class="uoj-score"
+                                            style="color:rgb(230,220,0)">46</a></div>
+                                    <div>4:14:27</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>14</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/CMXRYNP"
+                                       style="color:rgb(67,191,132)">CMXRYNP</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(206,230,0)">181</span>
+                                    </div>
+                                    <div>10:39:44</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423784" class="uoj-score"
+                                            style="color:rgb(0,204,0)">100</a></div>
+                                    <div>2:41:23</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423961" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>3:08:32</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424684" class="uoj-score"
+                                            style="color:rgb(230,197,0)">36</a></div>
+                                    <div>4:49:49</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>15</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/memset0"
+                                       style="color:rgb(67,191,130)">memset0</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(206,230,0)">181</span>
+                                    </div>
+                                    <div>10:42:26</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424568" class="uoj-score"
+                                            style="color:rgb(230,195,0)">35</a></div>
+                                    <div>4:35:20</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423459" class="uoj-score"
+                                            style="color:rgb(0,204,0)">100</a></div>
+                                    <div>1:50:19</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424426" class="uoj-score"
+                                            style="color:rgb(230,220,0)">46</a></div>
+                                    <div>4:16:47</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>16</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/cold_chair"
+                                       style="color:rgb(71,185,156)">cold_chair</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(209,230,0)">177</span>
+                                    </div>
+                                    <div>14:32:03</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424702" class="uoj-score"
+                                            style="color:rgb(184,230,0)">70</a></div>
+                                    <div>4:50:52</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424708" class="uoj-score"
+                                            style="color:rgb(195,230,0)">65</a></div>
+                                    <div>4:51:10</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424689" class="uoj-score"
+                                            style="color:rgb(230,211,0)">42</a></div>
+                                    <div>4:50:01</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>17</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/MinatoTomoka"
+                                       style="color:rgb(59,202,72)">MinatoTomoka</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(213,230,0)">171</span>
+                                    </div>
+                                    <div>10:20:21</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424538" class="uoj-score"
+                                            style="color:rgb(230,195,0)">35</a></div>
+                                    <div>4:31:18</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424053" class="uoj-score"
+                                            style="color:rgb(0,204,0)">100</a></div>
+                                    <div>3:24:35</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423668" class="uoj-score"
+                                            style="color:rgb(230,197,0)">36</a></div>
+                                    <div>2:24:28</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>18</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/1641129366"
+                                       style="color:rgb(68,206,55)">1641129366</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(213,230,0)">171</span>
+                                    </div>
+                                    <div>11:31:26</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424585" class="uoj-score"
+                                            style="color:rgb(230,149,0)">15</a></div>
+                                    <div>4:37:42</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423997" class="uoj-score"
+                                            style="color:rgb(0,204,0)">100</a></div>
+                                    <div>3:15:15</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424159" class="uoj-score"
+                                            style="color:rgb(216,230,0)">56</a></div>
+                                    <div>3:38:29</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>19</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/daklqw"
+                                       style="color:rgb(61,199,88)">daklqw</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(217,230,0)">166</span>
+                                    </div>
+                                    <div>10:13:52</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424711" class="uoj-score"
+                                            style="color:rgb(230,195,0)">35</a></div>
+                                    <div>4:51:16</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423493" class="uoj-score"
+                                            style="color:rgb(0,204,0)">100</a></div>
+                                    <div>1:56:19</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424063" class="uoj-score"
+                                            style="color:rgb(230,186,0)">31</a></div>
+                                    <div>3:26:17</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>20</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/jiangly"
+                                       style="color:rgb(67,206,55)">jiangly</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(218,230,0)">165</span>
+                                    </div>
+                                    <div>10:55:49</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423688" class="uoj-score"
+                                            style="color:rgb(0,204,0)">100</a></div>
+                                    <div>2:26:49</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424395" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>4:13:40</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424412" class="uoj-score"
+                                            style="color:rgb(230,161,0)">20</a></div>
+                                    <div>4:15:20</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>21</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/csy2005"
+                                       style="color:rgb(63,197,102)">csy2005</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(220,230,0)">163</span>
+                                    </div>
+                                    <div>8:06:57</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423835" class="uoj-score"
+                                            style="color:rgb(0,204,0)">100</a></div>
+                                    <div>2:47:52</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424051" class="uoj-score"
+                                            style="color:rgb(230,149,0)">15</a></div>
+                                    <div>3:24:27</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423483" class="uoj-score"
+                                            style="color:rgb(230,225,0)">48</a></div>
+                                    <div>1:54:38</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>22</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/nqiiii"
+                                       style="color:rgb(59,204,57)">nqiiii</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(220,230,0)">163</span>
+                                    </div>
+                                    <div>9:28:07</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423410" class="uoj-score"
+                                            style="color:rgb(230,195,0)">35</a></div>
+                                    <div>1:41:25</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424078" class="uoj-score"
+                                            style="color:rgb(0,204,0)">100</a></div>
+                                    <div>3:28:59</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424433" class="uoj-score"
+                                            style="color:rgb(230,179,0)">28</a></div>
+                                    <div>4:17:43</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>23</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/127"
+                                       style="color:rgb(65,193,119)">127</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(220,230,0)">162</span>
+                                    </div>
+                                    <div>10:15:22</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424366" class="uoj-score"
+                                            style="color:rgb(218,230,0)">55</a></div>
+                                    <div>4:09:25</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423259" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>1:07:52</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424811" class="uoj-score"
+                                            style="color:rgb(202,230,0)">62</a></div>
+                                    <div>4:58:05</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>24</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/xor3"
+                                       style="color:rgb(70,187,149)">xor3</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(221,230,0)">161</span>
+                                    </div>
+                                    <div>9:15:43</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423800" class="uoj-score"
+                                            style="color:rgb(184,230,0)">70</a></div>
+                                    <div>2:42:34</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423367" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>1:33:42</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424829" class="uoj-score"
+                                            style="color:rgb(230,220,0)">46</a></div>
+                                    <div>4:59:27</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>25</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/zx2003"
+                                       style="color:rgb(136,218,45)">zx2003</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(221,230,0)">161</span>
+                                    </div>
+                                    <div>11:38:25</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424760" class="uoj-score"
+                                            style="color:rgb(230,149,0)">15</a></div>
+                                    <div>4:54:58</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423804" class="uoj-score"
+                                            style="color:rgb(0,204,0)">100</a></div>
+                                    <div>2:42:48</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424310" class="uoj-score"
+                                            style="color:rgb(230,220,0)">46</a></div>
+                                    <div>4:00:39</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>26</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/waaadreamer"
+                                       style="color:rgb(66,192,125)">waaadreamer</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(222,230,0)">160</span>
+                                    </div>
+                                    <div>13:12:46</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424468" class="uoj-score"
+                                            style="color:rgb(184,230,0)">70</a></div>
+                                    <div>4:22:30</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424276" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>3:57:14</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424733" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>4:53:02</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>27</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/EricHuang2003"
+                                       style="color:rgb(58,203,61)">EricHuang2003</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(223,230,0)">158</span>
+                                    </div>
+                                    <div>9:34:03</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424685" class="uoj-score"
+                                            style="color:rgb(218,230,0)">55</a></div>
+                                    <div>4:49:49</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423210" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>0:57:03</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424210" class="uoj-score"
+                                            style="color:rgb(211,230,0)">58</a></div>
+                                    <div>3:47:11</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>28</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/Lagoon"
+                                       style="color:rgb(88,210,52)">Lagoon</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(223,230,0)">158</span>
+                                    </div>
+                                    <div>13:02:00</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424066" class="uoj-score"
+                                            style="color:rgb(184,230,0)">70</a></div>
+                                    <div>3:26:44</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424601" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>4:39:07</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424773" class="uoj-score"
+                                            style="color:rgb(230,213,0)">43</a></div>
+                                    <div>4:56:09</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>29</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/shiliangzhi"
+                                       style="color:rgb(67,191,130)">shiliangzhi</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(224,230,0)">157</span>
+                                    </div>
+                                    <div>9:06:12</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423265" class="uoj-score"
+                                            style="color:rgb(184,230,0)">70</a></div>
+                                    <div>1:08:49</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424129" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>3:34:48</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424470" class="uoj-score"
+                                            style="color:rgb(230,211,0)">42</a></div>
+                                    <div>4:22:35</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>30</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/zhouziheng"
+                                       style="color:rgb(74,180,173)">zhouziheng</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(226,230,0)">155</span>
+                                    </div>
+                                    <div>6:30:19</div>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <div><a href="/submission/424844" class="uoj-score"
+                                            style="color:rgb(0,204,0)">100</a></div>
+                                    <div>4:59:58</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423356" class="uoj-score"
+                                            style="color:rgb(218,230,0)">55</a></div>
+                                    <div>1:30:21</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>31</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/ugly2333"
+                                       style="color:rgb(76,169,177)">ugly2333</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(226,230,0)">154</span>
+                                    </div>
+                                    <div>5:53:31</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423540" class="uoj-score"
+                                            style="color:rgb(0,204,0)">100</a></div>
+                                    <div>2:02:54</div>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <div><a href="/submission/424235" class="uoj-score"
+                                            style="color:rgb(220,230,0)">54</a></div>
+                                    <div>3:50:37</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>32</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/QAQAutoMaton"
+                                       style="color:rgb(70,187,148)">QAQAutoMaton</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(229,230,0)">151</span>
+                                    </div>
+                                    <div>10:04:35</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424104" class="uoj-score"
+                                            style="color:rgb(184,230,0)">70</a></div>
+                                    <div>3:31:16</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424795" class="uoj-score"
+                                            style="color:rgb(230,195,0)">35</a></div>
+                                    <div>4:57:30</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423381" class="uoj-score"
+                                            style="color:rgb(230,220,0)">46</a></div>
+                                    <div>1:35:49</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>33</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/OhWeOnFire"
+                                       style="color:rgb(107,213,49)">OhWeOnFire</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(229,230,0)">151</span>
+                                    </div>
+                                    <div>10:41:17</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423908" class="uoj-score"
+                                            style="color:rgb(0,204,0)">100</a></div>
+                                    <div>3:00:04</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424193" class="uoj-score"
+                                            style="color:rgb(230,149,0)">15</a></div>
+                                    <div>3:44:50</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424269" class="uoj-score"
+                                            style="color:rgb(230,197,0)">36</a></div>
+                                    <div>3:56:23</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>34</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/Cyanic"
+                                       style="color:rgb(166,222,41)">Cyanic</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,230,0)">150</span>
+                                    </div>
+                                    <div>10:04:33</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423292" class="uoj-score"
+                                            style="color:rgb(184,230,0)">70</a></div>
+                                    <div>1:13:34</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424326" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>4:03:54</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424643" class="uoj-score"
+                                            style="color:rgb(230,195,0)">35</a></div>
+                                    <div>4:47:05</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>35</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/jokerwyt"
+                                       style="color:rgb(69,188,144)">jokerwyt</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,226,0)">145</span>
+                                    </div>
+                                    <div>8:46:27</div>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <div><a href="/submission/424254" class="uoj-score"
+                                            style="color:rgb(0,204,0)">100</a></div>
+                                    <div>3:53:30</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424731" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>4:52:57</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>36</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/top_secret"
+                                       style="color:rgb(75,175,178)">top_secret</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,226,0)">145</span>
+                                    </div>
+                                    <div>10:28:57</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423502" class="uoj-score"
+                                            style="color:rgb(0,204,0)">100</a></div>
+                                    <div>1:57:18</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424128" class="uoj-score"
+                                            style="color:rgb(230,149,0)">15</a></div>
+                                    <div>3:34:46</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424786" class="uoj-score"
+                                            style="color:rgb(230,184,0)">30</a></div>
+                                    <div>4:56:53</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>37</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/Teal"
+                                       style="color:rgb(66,192,124)">Teal</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,224,0)">143</span>
+                                    </div>
+                                    <div>11:27:07</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423547" class="uoj-score"
+                                            style="color:rgb(0,204,0)">100</a></div>
+                                    <div>2:04:19</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424793" class="uoj-score"
+                                            style="color:rgb(230,149,0)">15</a></div>
+                                    <div>4:57:19</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424492" class="uoj-score"
+                                            style="color:rgb(230,179,0)">28</a></div>
+                                    <div>4:25:29</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>38</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/ltst"
+                                       style="color:rgb(64,196,106)">ltst</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,223,0)">142</span>
+                                    </div>
+                                    <div>9:35:03</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424284" class="uoj-score" style="color:rgb(204,0,0)">0</a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424768" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>4:55:45</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424602" class="uoj-score"
+                                            style="color:rgb(122,230,0)">97</a></div>
+                                    <div>4:39:18</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>39</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/YuHaoXiang"
+                                       style="color:rgb(87,210,52)">YuHaoXiang</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,223,0)">142</span>
+                                    </div>
+                                    <div>12:46:36</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424567" class="uoj-score"
+                                            style="color:rgb(230,149,0)">15</a></div>
+                                    <div>4:35:06</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424111" class="uoj-score"
+                                            style="color:rgb(230,195,0)">35</a></div>
+                                    <div>3:32:10</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424603" class="uoj-score"
+                                            style="color:rgb(133,230,0)">92</a></div>
+                                    <div>4:39:20</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>40</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/aboluo2003"
+                                       style="color:rgb(59,201,74)">aboluo2003</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,223,0)">141</span>
+                                    </div>
+                                    <div>7:52:59</div>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <div><a href="/submission/424587" class="uoj-score"
+                                            style="color:rgb(0,204,0)">100</a></div>
+                                    <div>4:37:58</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423995" class="uoj-score"
+                                            style="color:rgb(230,209,0)">41</a></div>
+                                    <div>3:15:01</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>41</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/LMoliver"
+                                       style="color:rgb(71,184,158)">LMoliver</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,223,0)">141</span>
+                                    </div>
+                                    <div>10:53:27</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423886" class="uoj-score"
+                                            style="color:rgb(184,230,0)">70</a></div>
+                                    <div>2:56:46</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423930" class="uoj-score"
+                                            style="color:rgb(230,149,0)">15</a></div>
+                                    <div>3:03:02</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424741" class="uoj-score"
+                                            style="color:rgb(216,230,0)">56</a></div>
+                                    <div>4:53:39</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>42</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/nealchen2003"
+                                       style="color:rgb(60,200,80)">nealchen2003</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,220,0)">138</span>
+                                    </div>
+                                    <div>8:33:40</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423236" class="uoj-score"
+                                            style="color:rgb(230,195,0)">35</a></div>
+                                    <div>1:03:34</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423772" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>2:38:53</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424709" class="uoj-score"
+                                            style="color:rgb(211,230,0)">58</a></div>
+                                    <div>4:51:13</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>43</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/xuanyiming"
+                                       style="color:rgb(59,204,57)">xuanyiming</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,219,0)">136</span>
+                                    </div>
+                                    <div>6:32:59</div>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <div><a href="/submission/423392" class="uoj-score"
+                                            style="color:rgb(0,204,0)">100</a></div>
+                                    <div>1:37:33</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424763" class="uoj-score"
+                                            style="color:rgb(230,197,0)">36</a></div>
+                                    <div>4:55:26</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>44</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/skyh"
+                                       style="color:rgb(69,188,144)">skyh</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,217,0)">134</span>
+                                    </div>
+                                    <div>11:42:25</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424681" class="uoj-score"
+                                            style="color:rgb(230,195,0)">35</a></div>
+                                    <div>4:49:46</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423846" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>2:49:01</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424325" class="uoj-score"
+                                            style="color:rgb(220,230,0)">54</a></div>
+                                    <div>4:03:38</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>45</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/xgcxgc"
+                                       style="color:rgb(65,194,118)">xgcxgc</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,216,0)">133</span>
+                                    </div>
+                                    <div>8:56:50</div>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <div><a href="/submission/424289" class="uoj-score"
+                                            style="color:rgb(0,204,0)">100</a></div>
+                                    <div>3:58:46</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424810" class="uoj-score"
+                                            style="color:rgb(230,190,0)">33</a></div>
+                                    <div>4:58:04</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>46</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/Rose_max"
+                                       style="color:rgb(64,196,107)">Rose_max</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,216,0)">133</span>
+                                    </div>
+                                    <div>9:59:11</div>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <div><a href="/submission/424842" class="uoj-score"
+                                            style="color:rgb(0,204,0)">100</a></div>
+                                    <div>4:59:57</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424826" class="uoj-score"
+                                            style="color:rgb(230,190,0)">33</a></div>
+                                    <div>4:59:14</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>47</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/sgygd2004"
+                                       style="color:rgb(65,194,117)">sgygd2004</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,216,0)">133</span>
+                                    </div>
+                                    <div>11:02:38</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423457" class="uoj-score"
+                                            style="color:rgb(184,230,0)">70</a></div>
+                                    <div>1:49:58</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424419" class="uoj-score"
+                                            style="color:rgb(230,149,0)">15</a></div>
+                                    <div>4:15:58</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424782" class="uoj-score"
+                                            style="color:rgb(230,225,0)">48</a></div>
+                                    <div>4:56:42</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>48</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/tangruibai"
+                                       style="color:rgb(70,186,150)">tangruibai</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,216,0)">133</span>
+                                    </div>
+                                    <div>11:47:58</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424807" class="uoj-score"
+                                            style="color:rgb(230,195,0)">35</a></div>
+                                    <div>4:58:04</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423792" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>2:42:07</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424353" class="uoj-score"
+                                            style="color:rgb(223,230,0)">53</a></div>
+                                    <div>4:07:47</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>49</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/ElegiaInferno"
+                                       style="color:rgb(75,175,178)">ElegiaInferno</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,212,0)">127</span>
+                                    </div>
+                                    <div>8:40:12</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423762" class="uoj-score"
+                                            style="color:rgb(0,204,0)">100</a></div>
+                                    <div>2:37:22</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423805" class="uoj-score"
+                                            style="color:rgb(230,149,0)">15</a></div>
+                                    <div>2:42:49</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424026" class="uoj-score"
+                                            style="color:rgb(230,142,0)">12</a></div>
+                                    <div>3:20:01</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>50</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/supy"
+                                       style="color:rgb(144,219,44)">supy</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,211,0)">126</span>
+                                    </div>
+                                    <div>5:06:42</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424190" class="uoj-score"
+                                            style="color:rgb(184,230,0)">70</a></div>
+                                    <div>3:44:44</div>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <div><a href="/submission/423325" class="uoj-score"
+                                            style="color:rgb(216,230,0)">56</a></div>
+                                    <div>1:21:58</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>51</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/guyan"
+                                       style="color:rgb(77,163,175)">guyan</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,211,0)">126</span>
+                                    </div>
+                                    <div>8:09:40</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424645" class="uoj-score" style="color:rgb(204,0,0)">0</a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424465" class="uoj-score"
+                                            style="color:rgb(0,204,0)">100</a></div>
+                                    <div>4:21:57</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424213" class="uoj-score"
+                                            style="color:rgb(230,174,0)">26</a></div>
+                                    <div>3:47:43</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>52</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/rushcheyo"
+                                       style="color:rgb(60,200,81)">rushcheyo</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,211,0)">126</span>
+                                    </div>
+                                    <div>13:36:49</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424304" class="uoj-score"
+                                            style="color:rgb(230,149,0)">15</a></div>
+                                    <div>3:59:59</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424593" class="uoj-score"
+                                            style="color:rgb(195,230,0)">65</a></div>
+                                    <div>4:38:36</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424813" class="uoj-score"
+                                            style="color:rgb(230,220,0)">46</a></div>
+                                    <div>4:58:14</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>53</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/BJpers2"
+                                       style="color:rgb(71,186,154)">BJpers2</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,210,0)">125</span>
+                                    </div>
+                                    <div>8:56:06</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423232" class="uoj-score"
+                                            style="color:rgb(230,195,0)">35</a></div>
+                                    <div>1:03:04</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423917" class="uoj-score"
+                                            style="color:rgb(230,195,0)">35</a></div>
+                                    <div>3:01:46</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424712" class="uoj-score"
+                                            style="color:rgb(218,230,0)">55</a></div>
+                                    <div>4:51:16</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>54</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/cyx0406"
+                                       style="color:rgb(67,191,132)">cyx0406</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,210,0)">124</span>
+                                    </div>
+                                    <div>6:41:41</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423272" class="uoj-score"
+                                            style="color:rgb(184,230,0)">70</a></div>
+                                    <div>1:10:26</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423876" class="uoj-score"
+                                            style="color:rgb(230,149,0)">15</a></div>
+                                    <div>2:54:01</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423756" class="uoj-score"
+                                            style="color:rgb(230,204,0)">39</a></div>
+                                    <div>2:37:14</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>55</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/yy_zq"
+                                       style="color:rgb(78,155,174)">yy_zq</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,210,0)">124</span>
+                                    </div>
+                                    <div>11:13:18</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424589" class="uoj-score"
+                                            style="color:rgb(230,195,0)">35</a></div>
+                                    <div>4:38:12</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423570" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>2:08:16</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424502" class="uoj-score"
+                                            style="color:rgb(230,216,0)">44</a></div>
+                                    <div>4:26:50</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>56</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/EternalAlexander"
+                                       style="color:rgb(69,188,144)">EternalAlexander</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,209,0)">123</span>
+                                    </div>
+                                    <div>13:18:53</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424219" class="uoj-score"
+                                            style="color:rgb(230,195,0)">35</a></div>
+                                    <div>3:48:09</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424836" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>4:59:40</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424536" class="uoj-score"
+                                            style="color:rgb(230,213,0)">43</a></div>
+                                    <div>4:31:04</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>57</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/cly_none"
+                                       style="color:rgb(70,187,147)">cly_none</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,207,0)">120</span>
+                                    </div>
+                                    <div>14:35:50</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424701" class="uoj-score"
+                                            style="color:rgb(230,149,0)">15</a></div>
+                                    <div>4:50:50</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424716" class="uoj-score"
+                                            style="color:rgb(195,230,0)">65</a></div>
+                                    <div>4:51:34</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424737" class="uoj-score"
+                                            style="color:rgb(230,207,0)">40</a></div>
+                                    <div>4:53:26</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>58</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/Kloze"
+                                       style="color:rgb(71,185,157)">Kloze</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,205,0)">118</span>
+                                    </div>
+                                    <div>8:32:08</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424152" class="uoj-score"
+                                            style="color:rgb(184,230,0)">70</a></div>
+                                    <div>3:37:24</div>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <div><a href="/submission/424756" class="uoj-score"
+                                            style="color:rgb(230,225,0)">48</a></div>
+                                    <div>4:54:44</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>59</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/OYJason"
+                                       style="color:rgb(58,203,67)">OYJason</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,204,0)">117</span>
+                                    </div>
+                                    <div>10:22:34</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423532" class="uoj-score"
+                                            style="color:rgb(230,149,0)">15</a></div>
+                                    <div>2:01:16</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424107" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>3:31:46</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424670" class="uoj-score"
+                                            style="color:rgb(213,230,0)">57</a></div>
+                                    <div>4:49:32</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>60</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/godfatcat"
+                                       style="color:rgb(62,197,98)">godfatcat</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,203,0)">116</span>
+                                    </div>
+                                    <div>10:39:21</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423424" class="uoj-score"
+                                            style="color:rgb(218,230,0)">55</a></div>
+                                    <div>1:43:47</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424597" class="uoj-score"
+                                            style="color:rgb(230,149,0)">15</a></div>
+                                    <div>4:38:46</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424427" class="uoj-score"
+                                            style="color:rgb(230,220,0)">46</a></div>
+                                    <div>4:16:48</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>61</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/zhao_"
+                                       style="color:rgb(72,184,159)">zhao_</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,203,0)">115</span>
+                                    </div>
+                                    <div>9:29:14</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424552" class="uoj-score"
+                                            style="color:rgb(230,149,0)">15</a></div>
+                                    <div>4:33:41</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424006" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>3:16:43</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423399" class="uoj-score"
+                                            style="color:rgb(218,230,0)">55</a></div>
+                                    <div>1:38:50</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>62</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/222247"
+                                       style="color:rgb(74,181,172)">222247</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,203,0)">115</span>
+                                    </div>
+                                    <div>10:08:38</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424452" class="uoj-score"
+                                            style="color:rgb(230,149,0)">15</a></div>
+                                    <div>4:20:35</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423268" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>1:09:25</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424595" class="uoj-score"
+                                            style="color:rgb(218,230,0)">55</a></div>
+                                    <div>4:38:38</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>63</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/Darknesses"
+                                       style="color:rgb(74,180,172)">Darknesses</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,203,0)">115</span>
+                                    </div>
+                                    <div>11:02:20</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424441" class="uoj-score"
+                                            style="color:rgb(230,149,0)">15</a></div>
+                                    <div>4:19:02</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423559" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>2:06:41</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424575" class="uoj-score"
+                                            style="color:rgb(218,230,0)">55</a></div>
+                                    <div>4:36:37</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>64</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/hehezhou"
+                                       style="color:rgb(69,188,143)">hehezhou</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,202,0)">114</span>
+                                    </div>
+                                    <div>9:54:17</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423924" class="uoj-score"
+                                            style="color:rgb(230,149,0)">15</a></div>
+                                    <div>3:02:22</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423695" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>2:28:16</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424480" class="uoj-score"
+                                            style="color:rgb(220,230,0)">54</a></div>
+                                    <div>4:23:39</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>65</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/lengfz"
+                                       style="color:rgb(65,194,113)">lengfz</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,200,0)">112</span>
+                                    </div>
+                                    <div>11:32:56</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424172" class="uoj-score"
+                                            style="color:rgb(230,149,0)">15</a></div>
+                                    <div>3:41:05</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423871" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>2:53:23</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424816" class="uoj-score"
+                                            style="color:rgb(225,230,0)">52</a></div>
+                                    <div>4:58:28</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>66</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/Pengzhike"
+                                       style="color:rgb(77,164,176)">Pengzhike</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,199,0)">110</span>
+                                    </div>
+                                    <div>9:25:38</div>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <div><a href="/submission/424592" class="uoj-score"
+                                            style="color:rgb(230,149,0)">15</a></div>
+                                    <div>4:38:32</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424644" class="uoj-score"
+                                            style="color:rgb(126,230,0)">95</a></div>
+                                    <div>4:47:06</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>67</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/zsplj_"
+                                       style="color:rgb(76,166,176)">zsplj_</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,197,0)">108</span>
+                                    </div>
+                                    <div>10:40:06</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424577" class="uoj-score"
+                                            style="color:rgb(230,149,0)">15</a></div>
+                                    <div>4:36:52</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423727" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>2:33:17</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424094" class="uoj-score"
+                                            style="color:rgb(230,225,0)">48</a></div>
+                                    <div>3:29:57</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>68</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/gmh77"
+                                       style="color:rgb(70,187,149)">gmh77</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,196,0)">106</span>
+                                    </div>
+                                    <div>7:49:49</div>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <div><a href="/submission/424688" class="uoj-score"
+                                            style="color:rgb(230,149,0)">15</a></div>
+                                    <div>4:50:00</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423906" class="uoj-score"
+                                            style="color:rgb(135,230,0)">91</a></div>
+                                    <div>2:59:49</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>69</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/Sweetlemon"
+                                       style="color:rgb(75,179,178)">Sweetlemon</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,196,0)">106</span>
+                                    </div>
+                                    <div>9:19:27</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423416" class="uoj-score"
+                                            style="color:rgb(230,149,0)">15</a></div>
+                                    <div>1:42:27</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423760" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>2:37:20</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424837" class="uoj-score"
+                                            style="color:rgb(230,220,0)">46</a></div>
+                                    <div>4:59:40</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>70</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/yangkai"
+                                       style="color:rgb(66,192,125)">yangkai</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,196,0)">106</span>
+                                    </div>
+                                    <div>11:41:22</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424687" class="uoj-score"
+                                            style="color:rgb(230,149,0)">15</a></div>
+                                    <div>4:49:59</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423478" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>1:54:02</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424794" class="uoj-score"
+                                            style="color:rgb(230,220,0)">46</a></div>
+                                    <div>4:57:21</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>71</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/Uraboku"
+                                       style="color:rgb(78,154,173)">Uraboku</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,196,0)">106</span>
+                                    </div>
+                                    <div>12:24:15</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424691" class="uoj-score"
+                                            style="color:rgb(230,149,0)">15</a></div>
+                                    <div>4:50:04</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423806" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>2:42:51</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424714" class="uoj-score"
+                                            style="color:rgb(230,220,0)">46</a></div>
+                                    <div>4:51:20</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>72</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/Tiw_Air_OAO"
+                                       style="color:rgb(73,183,165)">Tiw_Air_OAO</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,195,0)">105</span>
+                                    </div>
+                                    <div>13:31:29</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424281" class="uoj-score"
+                                            style="color:rgb(184,230,0)">70</a></div>
+                                    <div>3:57:34</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424740" class="uoj-score"
+                                            style="color:rgb(230,149,0)">15</a></div>
+                                    <div>4:53:38</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424611" class="uoj-score"
+                                            style="color:rgb(230,161,0)">20</a></div>
+                                    <div>4:40:17</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>73</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/HirasawaYui"
+                                       style="color:rgb(70,186,151)">HirasawaYui</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,194,0)">103</span>
+                                    </div>
+                                    <div>11:49:16</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423754" class="uoj-score"
+                                            style="color:rgb(230,195,0)">35</a></div>
+                                    <div>2:37:06</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424808" class="uoj-score"
+                                            style="color:rgb(230,149,0)">15</a></div>
+                                    <div>4:58:04</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424401" class="uoj-score"
+                                            style="color:rgb(223,230,0)">53</a></div>
+                                    <div>4:14:06</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>74</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/deadecho"
+                                       style="color:rgb(66,193,119)">deadecho</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,192,0)">101</span>
+                                    </div>
+                                    <div>10:26:13</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424030" class="uoj-score"
+                                            style="color:rgb(230,195,0)">35</a></div>
+                                    <div>3:20:32</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423872" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>2:53:23</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424384" class="uoj-score"
+                                            style="color:rgb(230,163,0)">21</a></div>
+                                    <div>4:12:18</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>75</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/DCX"
+                                       style="color:rgb(71,186,154)">DCX</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,191,0)">100</span>
+                                    </div>
+                                    <div>6:36:35</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423646" class="uoj-score"
+                                            style="color:rgb(184,230,0)">70</a></div>
+                                    <div>2:21:08</div>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <div><a href="/submission/424413" class="uoj-score"
+                                            style="color:rgb(230,184,0)">30</a></div>
+                                    <div>4:15:27</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>76</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/zhoushuyu"
+                                       style="color:rgb(78,152,173)">zhoushuyu</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,191,0)">100</span>
+                                    </div>
+                                    <div>7:17:30</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424703" class="uoj-score"
+                                            style="color:rgb(218,230,0)">55</a></div>
+                                    <div>4:50:53</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423687" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>2:26:37</div>
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>77</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/soaringa"
+                                       style="color:rgb(71,186,153)">soaringa</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,191,0)">100</span>
+                                    </div>
+                                    <div>7:44:02</div>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <div><a href="/submission/423833" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>2:47:21</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424781" class="uoj-score"
+                                            style="color:rgb(218,230,0)">55</a></div>
+                                    <div>4:56:41</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>78</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/tdcp"
+                                       style="color:rgb(70,186,152)">tdcp</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,191,0)">100</span>
+                                    </div>
+                                    <div>8:59:57</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424330" class="uoj-score" style="color:rgb(204,0,0)">0</a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424735" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>4:53:08</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424345" class="uoj-score"
+                                            style="color:rgb(218,230,0)">55</a></div>
+                                    <div>4:06:49</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>79</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/Joker_Sin"
+                                       style="color:rgb(72,183,164)">Joker_Sin</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,190,0)">99</span>
+                                    </div>
+                                    <div>5:18:44</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424578" class="uoj-score" style="color:rgb(204,0,0)">0</a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423517" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>1:58:50</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424024" class="uoj-score"
+                                            style="color:rgb(220,230,0)">54</a></div>
+                                    <div>3:19:54</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>80</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/Master_Yi"
+                                       style="color:rgb(71,185,157)">Master_Yi</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,190,0)">99</span>
+                                    </div>
+                                    <div>6:40:18</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424828" class="uoj-score" style="color:rgb(204,0,0)">0</a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423435" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>1:45:50</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424753" class="uoj-score"
+                                            style="color:rgb(220,230,0)">54</a></div>
+                                    <div>4:54:28</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>81</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/nebulyu"
+                                       style="color:rgb(78,156,174)">nebulyu</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,190,0)">98</span>
+                                    </div>
+                                    <div>9:24:20</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423601" class="uoj-score"
+                                            style="color:rgb(230,149,0)">15</a></div>
+                                    <div>2:13:26</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423901" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>2:58:55</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424380" class="uoj-score"
+                                            style="color:rgb(230,202,0)">38</a></div>
+                                    <div>4:11:59</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>82</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/BilyHurington"
+                                       style="color:rgb(72,183,164)">BilyHurington</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,190,0)">98</span>
+                                    </div>
+                                    <div>9:44:02</div>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <div><a href="/submission/424784" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>4:56:49</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424656" class="uoj-score"
+                                            style="color:rgb(223,230,0)">53</a></div>
+                                    <div>4:47:13</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>83</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/BQAC"
+                                       style="color:rgb(76,168,176)">BQAC</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,189,0)">97</span>
+                                    </div>
+                                    <div>9:12:13</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423342" class="uoj-score"
+                                            style="color:rgb(230,195,0)">35</a></div>
+                                    <div>1:25:19</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424422" class="uoj-score"
+                                            style="color:rgb(230,149,0)">15</a></div>
+                                    <div>4:16:19</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424099" class="uoj-score"
+                                            style="color:rgb(230,223,0)">47</a></div>
+                                    <div>3:30:35</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>84</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/eecs"
+                                       style="color:rgb(65,194,114)">eecs</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,189,0)">97</span>
+                                    </div>
+                                    <div>10:32:08</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424315" class="uoj-score"
+                                            style="color:rgb(230,149,0)">15</a></div>
+                                    <div>4:01:16</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423960" class="uoj-score"
+                                            style="color:rgb(230,195,0)">35</a></div>
+                                    <div>3:08:11</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424040" class="uoj-score"
+                                            style="color:rgb(230,223,0)">47</a></div>
+                                    <div>3:22:41</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>85</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/Cirno9"
+                                       style="color:rgb(75,175,178)">Cirno9</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,189,0)">97</span>
+                                    </div>
+                                    <div>11:53:57</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423977" class="uoj-score"
+                                            style="color:rgb(230,195,0)">35</a></div>
+                                    <div>3:12:29</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424196" class="uoj-score"
+                                            style="color:rgb(230,149,0)">15</a></div>
+                                    <div>3:45:02</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424775" class="uoj-score"
+                                            style="color:rgb(230,223,0)">47</a></div>
+                                    <div>4:56:26</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>86</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/LanrTabe"
+                                       style="color:rgb(71,185,158)">LanrTabe</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,187,0)">94</span>
+                                    </div>
+                                    <div>10:28:16</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424509" class="uoj-score"
+                                            style="color:rgb(230,195,0)">35</a></div>
+                                    <div>4:27:42</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423418" class="uoj-score"
+                                            style="color:rgb(230,149,0)">15</a></div>
+                                    <div>1:42:45</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424434" class="uoj-score"
+                                            style="color:rgb(230,216,0)">44</a></div>
+                                    <div>4:17:49</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>87</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/CZF"
+                                       style="color:rgb(75,177,178)">CZF</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,185,0)">92</span>
+                                    </div>
+                                    <div>9:01:13</div>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <div><a href="/submission/424321" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>4:02:48</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424815" class="uoj-score"
+                                            style="color:rgb(230,223,0)">47</a></div>
+                                    <div>4:58:25</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>88</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/CrazySky"
+                                       style="color:rgb(66,192,125)">CrazySky</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,184,0)">91</span>
+                                    </div>
+                                    <div>3:44:57</div>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <div><a href="/submission/424820" class="uoj-score" style="color:rgb(204,0,0)">0</a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424195" class="uoj-score"
+                                            style="color:rgb(135,230,0)">91</a></div>
+                                    <div>3:44:57</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>89</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/luosiyuan"
+                                       style="color:rgb(76,172,177)">luosiyuan</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,184,0)">91</span>
+                                    </div>
+                                    <div>5:11:20</div>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <div><a href="/submission/424151" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>3:37:02</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423373" class="uoj-score"
+                                            style="color:rgb(230,220,0)">46</a></div>
+                                    <div>1:34:18</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>90</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/xinyue"
+                                       style="color:rgb(81,122,165)">xinyue</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,184,0)">91</span>
+                                    </div>
+                                    <div>5:45:17</div>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <div><a href="/submission/424166" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>3:39:45</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423555" class="uoj-score"
+                                            style="color:rgb(230,220,0)">46</a></div>
+                                    <div>2:05:32</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>91</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/ldxoi"
+                                       style="color:rgb(67,190,133)">ldxoi</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,184,0)">91</span>
+                                    </div>
+                                    <div>6:26:45</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424821" class="uoj-score" style="color:rgb(204,0,0)">0</a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424256" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>3:53:43</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423726" class="uoj-score"
+                                            style="color:rgb(230,220,0)">46</a></div>
+                                    <div>2:33:02</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>92</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/tianle1117"
+                                       style="color:rgb(77,162,175)">tianle1117</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,184,0)">91</span>
+                                    </div>
+                                    <div>6:39:31</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424765" class="uoj-score" style="color:rgb(204,0,0)">0</a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424770" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>4:56:07</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423421" class="uoj-score"
+                                            style="color:rgb(230,220,0)">46</a></div>
+                                    <div>1:43:24</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>93</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/Luffy"
+                                       style="color:rgb(77,159,174)">Luffy</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,184,0)">91</span>
+                                    </div>
+                                    <div>8:52:44</div>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <div><a href="/submission/424570" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>4:35:39</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424430" class="uoj-score"
+                                            style="color:rgb(230,220,0)">46</a></div>
+                                    <div>4:17:05</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>94</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/Yxs"
+                                       style="color:rgb(69,189,141)">Yxs</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,184,0)">91</span>
+                                    </div>
+                                    <div>8:55:23</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424757" class="uoj-score" style="color:rgb(204,0,0)">0</a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424777" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>4:56:30</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424290" class="uoj-score"
+                                            style="color:rgb(230,220,0)">46</a></div>
+                                    <div>3:58:53</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>95</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/hjk1030"
+                                       style="color:rgb(69,189,141)">hjk1030</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,184,0)">91</span>
+                                    </div>
+                                    <div>9:30:08</div>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <div><a href="/submission/424618" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>4:43:11</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424633" class="uoj-score"
+                                            style="color:rgb(230,220,0)">46</a></div>
+                                    <div>4:46:57</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>96</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/550576898"
+                                       style="color:rgb(72,183,163)">550576898</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,184,0)">91</span>
+                                    </div>
+                                    <div>9:43:42</div>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <div><a href="/submission/424650" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>4:47:09</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424778" class="uoj-score"
+                                            style="color:rgb(230,220,0)">46</a></div>
+                                    <div>4:56:33</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>97</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/xvchenhao"
+                                       style="color:rgb(75,175,178)">xvchenhao</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,184,0)">91</span>
+                                    </div>
+                                    <div>11:48:53</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424086" class="uoj-score"
+                                            style="color:rgb(230,149,0)">15</a></div>
+                                    <div>3:29:26</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424080" class="uoj-score"
+                                            style="color:rgb(230,218,0)">45</a></div>
+                                    <div>3:29:05</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424695" class="uoj-score"
+                                            style="color:rgb(230,186,0)">31</a></div>
+                                    <div>4:50:22</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>98</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/iwprc"
+                                       style="color:rgb(75,176,178)">iwprc</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,184,0)">90</span>
+                                    </div>
+                                    <div>3:44:05</div>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <div><a href="/submission/424187" class="uoj-score"
+                                            style="color:rgb(138,230,0)">90</a></div>
+                                    <div>3:44:05</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>99</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/oql"
+                                       style="color:rgb(77,158,174)">oql</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,184,0)">90</span>
+                                    </div>
+                                    <div>4:59:42</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423933" class="uoj-score"
+                                            style="color:rgb(230,195,0)">35</a></div>
+                                    <div>3:03:26</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424655" class="uoj-score" style="color:rgb(204,0,0)">0</a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/423492" class="uoj-score"
+                                            style="color:rgb(218,230,0)">55</a></div>
+                                    <div>1:56:16</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>100</td>
+                                <td><a class="uoj-username" href="https://uoj.ac/user/profile/Infleaking"
+                                       style="color:rgb(67,192,127)">Infleaking</a></td>
+                                <td>
+                                    <div><span class="uoj-score" data-max="300" style="color:rgb(230,182,0)">88</span>
+                                    </div>
+                                    <div>8:30:24</div>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <div><a href="/submission/424108" class="uoj-score"
+                                            style="color:rgb(230,195,0)">35</a></div>
+                                    <div>3:31:49</div>
+                                </td>
+                                <td>
+                                    <div><a href="/submission/424819" class="uoj-score"
+                                            style="color:rgb(223,230,0)">53</a></div>
+                                    <div>4:58:35</div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="top-buffer-md">
+                    <script>
+                        $("#problems td").each(function () {
+                            var el = $(this);
+                            let id = el.data('id');
+                            if (id == -1) return;
+                            id = String.fromCharCode(id + 64);
+                            console.log(id);
+                            el.text(id);
+                        })
+                    </script>
                     <h3>比赛通知</h3>
                     <div class="table-responsive">
                         <table class="table table-bordered table-hover table-vertical-middle table-text-center">
@@ -72,55 +2498,32 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>题面PDF和相关文件下载链接</td>
-                                <td style="white-space:pre-wrap; text-align: left">
-                                    题面PDF：https://img.uoj.ac/download/885e6b7299/statement.pdf
-                                    相关文件：https://img.uoj.ac/download/885e6b7299/download.zip
-                                </td>
-                                <td>2020-05-15 19:30:01</td>
+                            <tr th:each="notice:${contestsNotices}">
+                                <td th:text="${notice.getTitle()}"></td>
+                                <td style="white-space: pre-wrap;text-align: left" th:text="${notice.getContent()}"></td>
+                                <td th:text="${#dates.format(notice.getTime(),'yyyy/MM/dd   HH:mm')}"></td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
-
-
                     <h3>提问</h3>
                     <div>
-                        <h4>我的提问</h4>
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover table-vertical-middle table-text-center">
                                 <thead>
                                 <tr>
                                     <th style="width:10em">提问者</th>
-                                    <th style="width:7em">提问时间</th>
+                                    <th style="width:10em">提问时间</th>
                                     <th>问题</th>
+                                    <th>回答</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td colspan="233">无</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                    </div>
-
-                    <div>
-                        <h4>其他人的提问</h4>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover table-vertical-middle table-text-center">
-                                <thead>
-                                <tr>
-                                    <th style="width:10em">提问者</th>
-                                    <th style="width:7em">提问时间</th>
-                                    <th>问题</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td colspan="233">无</td>
+                                <tr th:each="question : ${contestQuestions}">
+                                    <td th:text="${question.getQuestionerName()}"></td>
+                                    <td th:text="${#dates.format(question.getTime(),'yyyy/MM/dd    HH:mm')}"></td>
+                                    <td th:text="${question.getContent()}"></td>
+                                    <td th:text="${question.getAnswer()}"></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -129,8 +2532,6 @@
                     </div>
                 </div>
             </div>
-
-
             <div class="col-sm-3">
                 <div class="panel panel-info">
                     <div class="panel-heading">
